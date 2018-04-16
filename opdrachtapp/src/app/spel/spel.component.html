@@ -1,0 +1,27 @@
+<ul>
+  <li>Naam: {{naam}}</li>
+
+  <li>Uitleg: {{uitleg}}</li>
+
+  <li>Benodigdheden:
+    <ul>
+      <li *ngFor='let benodigdheid of benodigdheden'>
+        <app-benodigdheid [naam]="benodigdheid"></app-benodigdheid>
+      </li>
+    </ul>
+  </li>
+
+  <li>Minimum: {{minAantalKinderen}}</li>
+
+  <li>Maximum: {{maxAantalKinderen}}</li>
+
+  <li>Doelgroep:
+    <ul>
+      <li *ngFor='let dg of doelgroep'>
+        {{dg}}
+      </li>
+    </ul>
+  </li>
+
+  <li>Toegevoegd op: {{toegevoegdOp | date:'dd/MM/yyyy'}}</li>
+</ul>

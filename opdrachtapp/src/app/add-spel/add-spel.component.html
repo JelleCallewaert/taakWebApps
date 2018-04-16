@@ -1,0 +1,15 @@
+<div class="ui large form segment"> 
+  <h3 class="ui header">Voeg spel toe:</h3>
+  <div class="field">
+    <label for="titel">Titel:</label> 
+    <input id="titel" name="titel" #nieuwSpelTitel>
+  </div>
+  <div class="field">
+    <label for="beschrijving">Beschrijving:</label> 
+    <input id="beschrijving" name="beschrijving" #nieuwSpelBeschrijving>
+  </div>
+  <button (click)="voegSpelToe(nieuwSpelTitel, nieuwSpelBeschrijving)"
+    class="ui positive right floated button">
+      Nieuw Spel Toevoegen
+  </button>
+</div>
