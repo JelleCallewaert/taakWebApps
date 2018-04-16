@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Spel } from '../spel/spel.model';
 
 @Component({
   selector: 'app-add-spel',
@@ -7,14 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddSpelComponent implements OnInit {
 
+  @Output() public nieuwSpel = new EventEmitter<Spel>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  voegSpelToe(nieuwSpelTitel: HTMLInputElement, nieuwSpelBeschrijving: HTMLInputElement){
-    console.log(nieuwSpelTitel.value);
-    console.log(nieuwSpelBeschrijving.value);
+  voegSpelToe(nieuwSpelTitel: HTMLInputElement, nieuwSpelBeschrijving: HTMLInputElement): boolean {
+    const spel = new Spel(nieuwSpelTitel.value, nieuwSpelBeschrijving.value);
+    this.nieuwSpel.emit(spel);
     return false;
   }
 

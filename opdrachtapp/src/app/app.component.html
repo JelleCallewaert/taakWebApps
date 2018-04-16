@@ -3,7 +3,13 @@
     Welcome to {{title}}!!
   </h1>
 </div>
-<div>
-  <app-add-spel></app-add-spel>
-	<app-spel></app-spel>
+<div class="ui container">
+  <div class="ui basic segment">
+    <app-add-spel (nieuwSpel)="nieuwSpelToegevoegd($event)"></app-add-spel>
+  </div>
+  <div class="ui segment">
+    <div class="ui cards">
+      <app-spel *ngFor='let localSpel of spelen' [spel]='localSpel'></app-spel>
+    </div>
+  </div>
 </div>

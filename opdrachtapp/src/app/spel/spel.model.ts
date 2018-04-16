@@ -4,8 +4,8 @@ export class Spel {
     private _benodigdheden = new Array<string>();
     private _minAantalKinderen: number;
     private _maxAantalKinderen: number;
-    private _doelgroep = new Array<string>();
-    private _toegevoegdOp: Date = new Date();
+    private _doelgroepen = new Array<string>();
+    private _datumToegevoegd: Date = new Date();
 
     constructor(titel: string, beschrijving: string) {
       this._titel = titel;
@@ -16,8 +16,24 @@ export class Spel {
     }
     get beschrijving() : string {
         return this._beschrijving;
-      }	
+    }
+    get benodigdheden() : string[] {
+      return this._benodigdheden;
+    }
+    get minAantalKinderen() : number {
+      return this._minAantalKinderen;
+    }
+    get maxAantalKinderen() : number {
+      return this._maxAantalKinderen;
+    }
+    get doelgroepen() : string[] {
+      return this._doelgroepen;
+    }	
+    get datumToegevoegd() : Date {
+      return this._datumToegevoegd;
+    }
+    
     addBenodigdheden(naam: string, hoeveelheid?: number) {
-      this._benodigdheden.push(`${hoeveelheid || 1} ${name}`);
+      this._benodigdheden.push(`${naam}: ${hoeveelheid || 1}`);
     }
   }
