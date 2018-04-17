@@ -15,6 +15,9 @@ export class SpelDataService {
     spel2.addBenodigdheden("vlag", 2);
     spel2.addBenodigdheden("Pakket stratego kaarten", 2);
 
+    spel1.addDoelgroep("kleuters");
+    spel2.addDoelgroep("actief");
+
     this._spelen.push(spel1);
     this._spelen.push(spel2);
   }

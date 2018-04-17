@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'SpelGenerator';
 
   private _spelen = new Array<Spel>();
+  public filterSpelDoelgroep: string;
 
   constructor(private _spelDataService: SpelDataService){
 
@@ -23,6 +24,10 @@ export class AppComponent {
 
   nieuwSpelToegevoegd(spel){
     this._spelDataService.voegNieuwSpelToe(spel);
+  }
+
+  applyFilter(filter: string){
+    this.filterSpelDoelgroep = filter;
   }
 
 }

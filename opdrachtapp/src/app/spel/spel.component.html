@@ -1,27 +1,24 @@
-<ul>
-  <li>Titel: {{spel.titel}}</li>
 
-  <li>Beschrijving: {{spel.beschrijving}}</li>
+<h1>{{spel.titel}}</h1>
 
-  <li>Benodigdheden:
+  <p>{{spel.beschrijving}}</p>
+
+  Benodigdheden:
     <ul>
       <li *ngFor='let benodigdheid of spel.benodigdheden'>
         <app-benodigdheid [naam]="benodigdheid"></app-benodigdheid>
       </li>
     </ul>
-  </li>
 
-  <li>Minimum: {{spel.minAantalKinderen}}</li>
+  <p>Minimum: {{spel.minAantalKinderen}}</p>
 
-  <li>Maximum: {{spel.maxAantalKinderen}}</li>
+  <p>Maximum: {{spel.maxAantalKinderen}}</p>
 
-  <li>Doelgroep:
+  Doelgroep:
     <ul>
-      <li *ngFor='let dg of spel.doelgroep'>
-        {{dg}}
+      <li *ngFor='let dg of spel.doelgroepen'>
+        <app-doelgroep [naam]="dg"></app-doelgroep>
       </li>
     </ul>
-  </li>
 
-  <li>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</li>
-</ul>
+  <p><i>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</i></p>

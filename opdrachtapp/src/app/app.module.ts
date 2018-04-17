@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SpelComponent } from './spel/spel.component';
 import { BenodigdheidComponent } from './benodigdheid/benodigdheid.component';
 import { AddSpelComponent } from './add-spel/add-spel.component';
+import { DoelgroepFilterPipe } from './doelgroep-filter.pipe';
+import { DoelgroepComponent } from './doelgroep/doelgroep.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { AddSpelComponent } from './add-spel/add-spel.component';
     AppComponent,
     SpelComponent,
     BenodigdheidComponent,
-    AddSpelComponent
+    AddSpelComponent,
+    DoelgroepFilterPipe,
+    DoelgroepComponent
   ],
   imports: [
     BrowserModule

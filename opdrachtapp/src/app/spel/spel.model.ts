@@ -36,4 +36,8 @@ export class Spel {
     addBenodigdheden(naam: string, hoeveelheid?: number) {
       this._benodigdheden.push(`${naam}: ${hoeveelheid || 1}`);
     }
+
+    addDoelgroep(naam: string){
+      this._doelgroepen.push(naam);
+    }
   }
