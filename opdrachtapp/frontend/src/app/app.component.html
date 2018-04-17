@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!!
+  </h1>
+</div>
+<div class="ui container">
+  <div class="ui basic segment">
+    <app-add-spel (nieuwSpel)="nieuwSpelToegevoegd($event)"></app-add-spel>
+  </div>
+  <div class="ui segment">
+      <div class="ui cards">
+          <input (keyup)='filterSpel$.next($event.target.value)' name="filter" type='text' placeholder='Filter doelgroep..' #filter>
+        </div>
+    <div class="ui cards">
+      <app-spel *ngFor='let localSpel of spelen | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel'></app-spel>
+    </div>
+  </div>
+</div>
