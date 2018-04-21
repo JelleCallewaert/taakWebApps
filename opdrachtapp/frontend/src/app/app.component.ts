@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Spel } from './spel/spel.model'
 import { SpelDataService } from './spel-data.service';
 import { Subject } from 'rxjs/Subject';
@@ -9,10 +9,15 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./app.component.css'],
   providers: [SpelDataService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+  ngOnInit(): void {
+    this._spelen = this._spelDataService.spelen;
+  }
   title = 'SpelGenerator';
 
-  private _spelen = new Array<Spel>();
+  private _spelen;
+
   public filterSpelDoelgroep: string;
   public filterSpel$ = new Subject<string>();
 
@@ -20,8 +25,8 @@ export class AppComponent {
     this.filterSpel$.subscribe(value => this.filterSpelDoelgroep = value);
   }
 
-  get spelen(): Spel[]{
-    return this._spelDataService.spelen;
+  get spelen(){
+    return this._spelen;
   }
 
   nieuwSpelToegevoegd(spel){

@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Spel } from './spel/spel.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SpelDataService {
 
   private _spelen = new Array<Spel>();
+  private readonly _appUrl = '/API/spelen/';
 
-  constructor() {
+  constructor(private http: HttpClient) {
     let spel1 = new Spel("Tikkertje", "Loop weg van de tikker!!!");
     let spel2 = new Spel("Stratego", "Versla de tegenstander en verover de vlag!!!");
        
@@ -23,8 +28,16 @@ export class SpelDataService {
     this._spelen.push(spel2);
   }
 
-  get spelen(): Spel[] {
-    return this._spelen;
+  get spelen(): Observable<Spel[]> {
+    return this.http
+      .get(this._appUrl)
+      .pipe(
+        map((list: any[]) : Spel[] => 
+          list.map(item =>
+            new Spel(item.titel, item.beschrijving)
+          )
+        )
+      );
   }
 
   voegNieuwSpelToe(spel: Spel){
