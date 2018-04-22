@@ -11,12 +11,13 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AppComponent implements OnInit{
 
-  ngOnInit(): void {
-    this._spelen = this._spelDataService.spelen;
-  }
+  private _spelen;
+  
   title = 'SpelGenerator';
 
-  private _spelen;
+  ngOnInit(){
+    this._spelen = this._spelDataService.spelen;
+  }
 
   public filterSpelDoelgroep: string;
   public filterSpel$ = new Subject<string>();

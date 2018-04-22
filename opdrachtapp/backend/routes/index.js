@@ -14,7 +14,22 @@ router.get('/API/spel/', function(req, res, next) {
 });
 
 router.get('/API/spelen/', function(req, res, next){
-  res.send('processing request here!')
+  Spel.find(function(err, spelen){
+    if(err) {
+      return next(err);
+    }
+    res.json(spelen);
+  });
+});
+
+router.post('/API/spelen/', function(req, res, next){
+  let spel = new Spel(req.body);
+  spel.save(function(err, rec){
+    if(err){
+      return next(err);
+    }
+    res.json(rec);
+  });
 });
 
 module.exports = router;

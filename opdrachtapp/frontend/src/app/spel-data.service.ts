@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Spel } from './spel/spel.model';
+
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,6 +10,7 @@ import { map } from 'rxjs/operators';
 export class SpelDataService {
 
   private _spelen = new Array<Spel>();
+  
   private readonly _appUrl = '/API/spelen/';
 
   constructor(private http: HttpClient) {
