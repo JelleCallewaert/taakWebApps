@@ -12,7 +12,7 @@
           <input (keyup)='filterSpel$.next($event.target.value)' name="filter" type='text' placeholder='Filter doelgroep..' #filter>
         </div>
     <div class="ui cards">
-      <app-spel *ngFor='let localSpel of spelen | async | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel'></app-spel>
+      <app-spel *ngFor='let localSpel of spelen | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel'></app-spel>
     </div>
   </div>
 </div>

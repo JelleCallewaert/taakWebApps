@@ -1,5 +1,6 @@
-import { Component, Input , OnInit } from '@angular/core';
+import { Component, Input, Output , OnInit } from '@angular/core';
 import { Spel } from './spel.model';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-spel',
@@ -9,11 +10,16 @@ import { Spel } from './spel.model';
 export class SpelComponent implements OnInit {
 
   @Input() public spel: Spel;
+  @Output() public deleteSpel = new EventEmitter<Spel>();
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  removeSpel(){
+    this.deleteSpel.emit(this.spel);
   }
 
 }

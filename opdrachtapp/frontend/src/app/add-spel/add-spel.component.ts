@@ -16,7 +16,7 @@ export class AddSpelComponent implements OnInit {
   }
 
   voegSpelToe(nieuwSpelTitel: HTMLInputElement, nieuwSpelBeschrijving: HTMLInputElement): boolean {
-    const spel = new Spel(nieuwSpelTitel.value, nieuwSpelBeschrijving.value);
+    const spel = new Spel(nieuwSpelTitel.value, nieuwSpelBeschrijving.value, [], 0, 0, [], null);
     this.nieuwSpel.emit(spel);
     return false;
   }

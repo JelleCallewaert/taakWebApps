@@ -11,12 +11,13 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AppComponent implements OnInit{
 
-  private _spelen;
+  private _spelen: Spel[];
   
   title = 'SpelGenerator';
 
   ngOnInit(){
-    this._spelen = this._spelDataService.spelen;
+    this._spelDataService.spelen
+      .subscribe(items => this._spelen = items);
   }
 
   public filterSpelDoelgroep: string;
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit{
   }
 
   nieuwSpelToegevoegd(spel){
-    this._spelDataService.voegNieuwSpelToe(spel);
+    this._spelDataService.voegNieuwSpelToe(spel).subscribe(item => this._spelen.push(item));
   }
 
   applyFilter(filter: string){
