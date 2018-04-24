@@ -5,19 +5,19 @@ export class Spel {
     private _id: string;
     private _titel: string;
     private _beschrijving: string;
-    private _benodigdheden = new Array<string>();
+    private _benodigdheden = new Array<Benodigdheid>();
     private _minAantalKinderen: number;
     private _maxAantalKinderen: number;
-    private _doelgroepen = new Array<string>();
+    private _doelgroepen = new Array<Doelgroep>();
     private _datumToegevoegd: Date;
 
     constructor(
       titel: string, 
-      beschrijving: string, 
-      benodigdheden: string[], 
-      minAantalKinderen: number, 
-      maxAantalKinderen: number, 
-      doelgroepen: string[], 
+      beschrijving?: string, 
+      benodigdheden: Benodigdheid[] = [], 
+      minAantalKinderen?: number, 
+      maxAantalKinderen?: number, 
+      doelgroepen: Doelgroep[] = [], 
       datumToegevoegd: Date = null
     ) {
       this._titel = titel;
@@ -34,7 +34,7 @@ export class Spel {
     get beschrijving() : string {
         return this._beschrijving;
     }
-    get benodigdheden() : string[] {
+    get benodigdheden() : Benodigdheid[] {
       return this._benodigdheden;
     }
     get minAantalKinderen() : number {
@@ -43,19 +43,22 @@ export class Spel {
     get maxAantalKinderen() : number {
       return this._maxAantalKinderen;
     }
-    get doelgroepen() : string[] {
+    get doelgroepen() : Doelgroep[] {
       return this._doelgroepen;
     }	
     get datumToegevoegd() : Date {
       return this._datumToegevoegd;
     }
+    get id() : string {
+      return this._id;
+    }
     
-    addBenodigdheden(naam: string, hoeveelheid?: number) {
-      this._benodigdheden.push(`${naam}: ${hoeveelheid || 1}`);
+    addBenodigdheden(benodigdheid: Benodigdheid) {
+      this._benodigdheden.push(benodigdheid);
     }
 
-    addDoelgroep(naam: string){
-      this._doelgroepen.push(naam);
+    addDoelgroep(doelgroep: Doelgroep){
+      this._doelgroepen.push(doelgroep);
     }
 
     toJSON(){

@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Spel } from '../spel/spel.model';
+import { SpelDataService } from '../spel-data.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-spel',
@@ -8,17 +10,39 @@ import { Spel } from '../spel/spel.model';
 })
 export class AddSpelComponent implements OnInit {
 
+  private spel : FormGroup;
+
   @Output() public nieuwSpel = new EventEmitter<Spel>();
 
-  constructor() { }
+  constructor(private _spelDataService: SpelDataService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.spel = this.fb.group({
+      titel:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]]
+      //benodigdheden: this.fb.array([this.createBenodigdheden()])
+    })
   }
 
-  voegSpelToe(nieuwSpelTitel: HTMLInputElement, nieuwSpelBeschrijving: HTMLInputElement): boolean {
-    const spel = new Spel(nieuwSpelTitel.value, nieuwSpelBeschrijving.value, [], 0, 0, [], null);
+  onSubmit(){
+    this.nieuwSpel.emit(new Spel(this.spel.value.titel));
+  }
+
+  voegSpelToe(
+    nieuwSpelTitel: HTMLInputElement, 
+    nieuwSpelBeschrijving: HTMLInputElement, 
+    nieuwSpelMinAantal: HTMLInputElement, 
+    nieuwSpelMaxAantal: HTMLInputElement
+    ): boolean {
+      //controle op min en max!!!
+    const spel = new Spel(
+      nieuwSpelTitel.value, 
+      nieuwSpelBeschrijving.value, 
+      [], 
+      parseInt(nieuwSpelMinAantal.value), 
+      parseInt(nieuwSpelMaxAantal.value), 
+      [], 
+      null);
     this.nieuwSpel.emit(spel);
     return false;
   }
-
 }

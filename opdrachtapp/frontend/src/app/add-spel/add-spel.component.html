@@ -1,15 +1,10 @@
-<div class="ui large form segment"> 
-  <h3 class="ui header">Voeg spel toe:</h3>
+<form [formGroup]='spel' (ngSubmit)='onSubmit()'>
+  <h3 class="ui header">Voeg Spel Toe</h3>
   <div class="field">
-    <label for="titel">Titel:</label> 
-    <input id="titel" name="titel" #nieuwSpelTitel>
+    <label for='titel'>Titel:</label>
+    <input type="text" id="titel" formControlName='titel'>
   </div>
-  <div class="field">
-    <label for="beschrijving">Beschrijving:</label> 
-    <input id="beschrijving" name="beschrijving" #nieuwSpelBeschrijving>
-  </div>
-  <button (click)="voegSpelToe(nieuwSpelTitel, nieuwSpelBeschrijving)"
-    class="ui positive right floated button">
-      Nieuw Spel Toevoegen
-  </button>
-</div>
+  <button type="submit">Voeg Toe</button>
+</form>  
+REMOVE {{ spel.value | json}} {{ spel.valid }}
+{{ spel.get("titel").errors | json }}

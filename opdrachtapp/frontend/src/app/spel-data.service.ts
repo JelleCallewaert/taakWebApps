@@ -44,6 +44,12 @@ export class SpelDataService {
       );
   }
 
+  getSpel(id: string): Observable<Spel> {
+    return this.http
+      .get(`${this._appUrl}/spel/${id}`)
+      .pipe(map(Spel.fromJSON));
+  }
+
   voegNieuwSpelToe(spel: Spel): Observable<Spel> {
     return this.http
       .post(this._appUrl, spel)
@@ -53,6 +59,20 @@ export class SpelDataService {
           new Spel(item.titel, item.beschrijving, item.benodigdheden, item.minAantal, item.maxAantal, item.doelgroepen, item.datumCreated)
         )
       );
+  }
+
+  verwijderSpel(spel: Spel): Observable<Spel> {
+    console.log("verwijderspel");
+    return this.http
+      .delete(`${this._appUrl}/spel/${spel.id}`)
+      .pipe(map(Spel.fromJSON));
+  }
+
+  deleteSpel(spel: Spel): Observable<Spel> {
+    console.log("deletespel");
+    return this.http
+      .delete(`${this._appUrl}/spel/${spel.id}`)
+      .pipe(map(Spel.fromJSON));
   }
 
 }

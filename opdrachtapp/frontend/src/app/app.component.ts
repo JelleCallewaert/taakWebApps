@@ -39,4 +39,9 @@ export class AppComponent implements OnInit{
     this.filterSpelDoelgroep = filter;
   }
 
+  verwijderSpel(spel){
+    console.log("verwijder spel app comp");
+    this._spelDataService.verwijderSpel(spel).subscribe(item => (this._spelen = this._spelen.filter(val => item.id !== val.id)));
+  }
+
 }

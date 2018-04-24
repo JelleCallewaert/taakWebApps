@@ -1,6 +1,6 @@
-import { Component, Input, Output , OnInit } from '@angular/core';
+import { Component, Input, Output , OnInit, EventEmitter } from '@angular/core';
 import { Spel } from './spel.model';
-import { EventEmitter } from 'events';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-spel',
@@ -18,8 +18,9 @@ export class SpelComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeSpel(){
+  verwijderSpel(){
     this.deleteSpel.emit(this.spel);
+    console.log("emit");
   }
 
 }
