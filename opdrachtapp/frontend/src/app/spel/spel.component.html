@@ -3,10 +3,22 @@
     <a class="header" href='/spel/{{spel.id}}'>{{ spel.titel }}</a>
     <a class="ui content"> {{ spel.beschrijving }}</a>
   </div>
-  <div *ngFor='let dg of spel.doelgroepen' class="content">
-    <li> {{dg.naam}} </li>
+
+  <div class="content">
+    <a class="ui content">Min: {{ spel.minAantal }} </a>
   </div>
-  
+
+  <div class="content">
+      <a class="ui content">Max: {{ spel.maxAantal }} </a>
+  </div>
+  <div class="content">
+    Doelgroepen:
+    <ul class="ui list">
+      <li *ngFor='let dg of spel.doelgroepen'>
+        <app-doelgroep [naam]="dg"></app-doelgroep>
+      </li>
+    </ul>
+  </div>  
   <div class="content">
   <p><i>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</i></p>
   </div>

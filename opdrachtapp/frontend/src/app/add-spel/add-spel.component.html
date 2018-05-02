@@ -4,13 +4,19 @@
     <label for='titel'>Titel:</label>
     <input type="text" id="titel" formControlName='titel'>
   </div>
+
   <div class="field">
-    <label for='beschrijving'>Beschrijving:</label>
+    <label for="beschrijving">Beschrijving:</label>
     <input type="text" id="beschrijving" formControlName='beschrijving'>
   </div>
-  <div class="field">
 
+  <div class="field">
+    <label for="minAantal">Minimum</label>
+    <input type="number" id="minAantal" formControlName='minAantal'>
+    <label for="maxAantal">Maximum</label>
+    <input type="number" id="maxAantal" formControlName='maxAantal'>
   </div>
+
   <div class="field">
     <label for='beschrijving'>Doelgroepen:</label>
     <div>
@@ -20,5 +26,8 @@
         <input type="checkbox" ng-model="formData.doelgroep.kas" name="doelgroep" value="kastaards"/>Kastaards <br />
     </div>
   </div>
+
+
+
   <button type="submit">Voeg Toe</button>
 </form>

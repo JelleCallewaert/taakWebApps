@@ -6,25 +6,25 @@ export class Spel {
     private _titel: string;
     private _beschrijving: string;
     private _benodigdheden = new Array<Benodigdheid>();
-    private _minAantalKinderen: number;
-    private _maxAantalKinderen: number;
+    private _minAantal: number;
+    private _maxAantal: number;
     private _doelgroepen = new Array<Doelgroep>();
     private _datumToegevoegd: Date;
 
     constructor(
       titel: string, 
-      beschrijving?: string, 
+      beschrijving: string, 
       benodigdheden: Benodigdheid[] = [], 
-      minAantalKinderen?: number, 
-      maxAantalKinderen?: number, 
+      minAantal?: number, 
+      maxAantal?: number, 
       doelgroepen: Doelgroep[] = [], 
       datumToegevoegd: Date = null
     ) {
       this._titel = titel;
       this._beschrijving = beschrijving;
       this._benodigdheden = benodigdheden;
-      this._minAantalKinderen = minAantalKinderen;
-      this._maxAantalKinderen = maxAantalKinderen;
+      this._minAantal = minAantal;
+      this._maxAantal = maxAantal;
       this._doelgroepen = doelgroepen;
       this._datumToegevoegd = datumToegevoegd ? datumToegevoegd : new Date();
     }
@@ -37,11 +37,11 @@ export class Spel {
     get benodigdheden() : Benodigdheid[] {
       return this._benodigdheden;
     }
-    get minAantalKinderen() : number {
-      return this._minAantalKinderen;
+    get minAantal() : number {
+      return this._minAantal;
     }
-    get maxAantalKinderen() : number {
-      return this._maxAantalKinderen;
+    get maxAantal() : number {
+      return this._maxAantal;
     }
     get doelgroepen() : Doelgroep[] {
       return this._doelgroepen;
@@ -67,8 +67,8 @@ export class Spel {
         titel: this._titel,
         beschrijving: this._beschrijving,
         benodigdheden: this._benodigdheden,
-        minAantal: this._minAantalKinderen,
-        maxAantal: this._maxAantalKinderen,
+        minAantal: this._minAantal,
+        maxAantal: this._maxAantal,
         doelgroepen: this._doelgroepen,
         datumCreated: this._datumToegevoegd
       };

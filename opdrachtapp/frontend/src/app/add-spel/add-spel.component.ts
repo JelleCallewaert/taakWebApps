@@ -21,8 +21,9 @@ export class AddSpelComponent implements OnInit {
     this.spel = this.fb.group({
       titel:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       beschrijving: [''],
-      doelgroepen: ['']
       //benodigdheden: this.fb.array([this.createBenodigdheden()])
+      minAantal: [0],
+      maxAantal: [0]
     })
   }
 
@@ -31,9 +32,10 @@ export class AddSpelComponent implements OnInit {
       this.spel.value.titel,
       this.spel.value.beschrijving,
       [],
-      0,
-      0,
-      [new Doelgroep("kleuters")]
+      this.spel.value.minAantal,
+      this.spel.value.maxAantal,
+      []
     ));
+    console.log("add spel component emit" + this.spel.value.minAantal);
   }
 }

@@ -25,7 +25,10 @@ router.post('/API/spelen/', function(req, res, next){
     let spel = new Spel({
         titel: req.body.titel,
         beschrijving: req.body.beschrijving,
+        minAantal: req.body.minAantal,
+        maxAantal: req.body.maxAantal,
         datumCreated: req.body.datumCreated
+        
     });
     spel.benodigdheden = nodigs;
     spel.save(function(err, sp){
