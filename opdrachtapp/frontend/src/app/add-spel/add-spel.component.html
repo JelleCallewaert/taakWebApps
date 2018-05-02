@@ -1,10 +1,24 @@
-<form [formGroup]='spel' (ngSubmit)='onSubmit()'>
+<form class="ui form" [formGroup]='spel' (ngSubmit)='onSubmit()'>
   <h3 class="ui header">Voeg Spel Toe</h3>
   <div class="field">
     <label for='titel'>Titel:</label>
     <input type="text" id="titel" formControlName='titel'>
   </div>
+  <div class="field">
+    <label for='beschrijving'>Beschrijving:</label>
+    <input type="text" id="beschrijving" formControlName='beschrijving'>
+  </div>
+  <div class="field">
+
+  </div>
+  <div class="field">
+    <label for='beschrijving'>Doelgroepen:</label>
+    <div>
+        <input type="checkbox" ng-model="formData.doelgroep.kl" name="doelgroep" value="kleuters"/>Kleuters <br />
+        <input type="checkbox" ng-model="formData.doelgroep.act" name="doelgroep" value="actief"/>Actief <br />
+        <input type="checkbox" ng-model="formData.doelgroep.crea" name="doelgroep" value="creatief"/>Creatief <br />
+        <input type="checkbox" ng-model="formData.doelgroep.kas" name="doelgroep" value="kastaards"/>Kastaards <br />
+    </div>
+  </div>
   <button type="submit">Voeg Toe</button>
-</form>  
-REMOVE {{ spel.value | json}} {{ spel.valid }}
-{{ spel.get("titel").errors | json }}
+</form>

@@ -1,11 +1,7 @@
 #beschrijving{
-    height: 100px;
-}
-
-.ng-invalid:not(form) {
-    background: tomato; 
+    height: 60px;
 }
 
 .ng-valid:not(form) {
-    background:  lightgreen; 
+     background: lawngreen;
 }

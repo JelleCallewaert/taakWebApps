@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Spel } from './spel/spel.model'
 import { SpelDataService } from './spel-data.service';
 import { Subject } from 'rxjs/Subject';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Subject } from 'rxjs/Subject';
 export class AppComponent implements OnInit{
 
   private _spelen: Spel[];
+  public errorMsg: string;
   
   title = 'SpelGenerator';
 
@@ -32,16 +34,22 @@ export class AppComponent implements OnInit{
   }
 
   nieuwSpelToegevoegd(spel){
-    this._spelDataService.voegNieuwSpelToe(spel).subscribe(item => this._spelen.push(item));
+    this._spelDataService.voegNieuwSpelToe(spel)
+      .subscribe(item => this._spelen.push(item));
   }
 
   applyFilter(filter: string){
     this.filterSpelDoelgroep = filter;
   }
 
-  verwijderSpel(spel){
-    console.log("verwijder spel app comp");
-    this._spelDataService.verwijderSpel(spel).subscribe(item => (this._spelen = this._spelen.filter(val => item.id !== val.id)));
+  removeSpel(spel){
+    this._spelDataService.verwijderSpel(spel).subscribe(item => (this._spelen = this._spelen.filter(val => item.id !== val.id)),
+    (error: HttpErrorResponse) => {
+      this.errorMsg = `Error ${error.status} while removing recipes for ${
+        spel.titel
+      }: ${error.error}`;
+    }
+  );
   }
 
 }

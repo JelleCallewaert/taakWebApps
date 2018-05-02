@@ -6,6 +6,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 require('./models/Spel');
+require('./models/Benodigdheid');
+require('./models/Doelgroep');
 
 mongoose.connect('mongodb://localhost/speldb');
 

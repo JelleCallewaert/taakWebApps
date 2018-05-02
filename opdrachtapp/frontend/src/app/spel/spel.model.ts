@@ -75,7 +75,7 @@ export class Spel {
     }
 
     static fromJSON(json: any): Spel {
-      const rec = new Spel(
+      const sp = new Spel(
         json.titel,
         json.beschrijving,
         json.benodigdheden.map(Benodigdheid.fromJSON),
@@ -84,7 +84,7 @@ export class Spel {
         json.doelgroepen.map(Doelgroep.fromJSON),
         json.datumCreated
       );
-      rec._id = json._id;
-      return rec;
+      sp._id = json._id;
+      return sp;
     }
   }

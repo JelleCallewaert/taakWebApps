@@ -1,18 +1,23 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var SpelSchema = new mongoose.Schema({
+let SpelSchema = new mongoose.Schema({
   titel: String,
   beschrijving: String,
-  benodigdheden: [{
+  benodigdheden: [
+    {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Benodigdheid'
-  }],
+    }
+  ],
   maxAantal: Number,
   minAantal: Number,
-  doelgroepen: [{
+  doelgroepen: [
+    {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Doelgroep'
-  }],
+    }
+  ],
   datumCreated: { type: Date, default: Date.now }
 });	
+
 mongoose.model('Spel', SpelSchema);

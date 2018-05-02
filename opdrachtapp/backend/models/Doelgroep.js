@@ -1,7 +1,13 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var DoelgroepSchema = new mongoose.Schema({
+let DoelgroepSchema = new mongoose.Schema({
   naam: String
 });	
+DoelgroepSchema.pre('remove', function (next) {
+  this.model('Spel').update(
+    {}, 
+    { $pull: { doelgroep: this._id } }, 
+    { safe: true, multi: true }, next);
+});
 
 mongoose.model('Doelgroep', DoelgroepSchema);

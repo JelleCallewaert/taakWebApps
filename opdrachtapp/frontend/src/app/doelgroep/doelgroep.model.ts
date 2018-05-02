@@ -1,25 +1,9 @@
-export enum Naam {
-  "None",
-  "Kleuters",
-  "Actief",
-  "Creatief",
-  "Kastaars"
-}
-
-export class NaamDoelgroep {
-  constructor(private _naam: Naam){
-  }
-  get naam(): Naam {
-    return this._naam;
-  }
-}
-
 export class Doelgroep{
 
     private _id : string;
-    private _naam : Naam;
+    private _naam : string;
 
-    constructor(naam: Naam = Naam.None){
+    constructor(naam: string){
         this._naam = naam;
     }
 
@@ -32,10 +16,10 @@ export class Doelgroep{
       get id(): string {
         return this._id;
       }
-      get naam(): Naam {
+      get naam(): string {
         return this._naam;
       }
-      set naam(name: Naam) {
+      set naam(name: string) {
         this._naam = name;
       }
       get dg(): string{
