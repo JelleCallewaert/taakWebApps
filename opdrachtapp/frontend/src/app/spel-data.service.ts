@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { map } from 'rxjs/operators';
+import { Benodigdheid } from './benodigdheid/benodigdheid.model';
 
 @Injectable()
 export class SpelDataService {
@@ -12,6 +13,7 @@ export class SpelDataService {
   private _spelen = new Array<Spel>();
   
   private readonly _appUrl = '/API/';
+
 
   constructor(private http: HttpClient) {
 
@@ -22,9 +24,7 @@ export class SpelDataService {
       .get(`${this._appUrl}/spelen`)
       .pipe(
         map((list: any[]) : Spel[] => 
-          list.map(item =>
-            new Spel(item.titel, item.beschrijving, item.benodigdheden, item.minAantal, item.maxAantal, item.doelgroepen, item.datumCreated)
-          )
+          list.map(Spel.fromJSON)
         )
       );
   }
@@ -40,10 +40,14 @@ export class SpelDataService {
       .post(`${this._appUrl}/spelen`, spel)
       .pipe(
         map(
-          (item: any): Spel => 
-          new Spel(item.titel, item.beschrijving, item.benodigdheden, item.minAantal, item.maxAantal, item.doelgroepen, item.datumCreated)
+        Spel.fromJSON
         )
       );
+  }
+
+  voegBenodigdheidToeAanSpel(nodig: Benodigdheid, spel: Spel) : Observable<Benodigdheid>{
+    const url = `${this._appUrl}/spel/${spel.id}/benodigdheden`;
+    return this.http.post(url, spel).pipe(map(Benodigdheid.fromJSON));
   }
 
   verwijderSpel(spel: Spel): Observable<Spel> {

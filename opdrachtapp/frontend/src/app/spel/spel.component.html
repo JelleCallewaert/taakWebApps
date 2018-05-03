@@ -5,12 +5,22 @@
   </div>
 
   <div class="content">
+    Benodigdheden:
+    <ul class="ui list">
+      <li *ngFor='let nodig of spel.benodigdheden'>
+        <app-doelgroep [naam]="nodig"></app-doelgroep>
+      </li>
+    </ul>
+  </div>  
+
+  <div class="content">
     <a class="ui content">Min: {{ spel.minAantal }} </a>
   </div>
 
   <div class="content">
       <a class="ui content">Max: {{ spel.maxAantal }} </a>
   </div>
+
   <div class="content">
     Doelgroepen:
     <ul class="ui list">

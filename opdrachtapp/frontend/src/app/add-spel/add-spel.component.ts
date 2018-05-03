@@ -20,8 +20,8 @@ export class AddSpelComponent implements OnInit {
   ngOnInit() {
     this.spel = this.fb.group({
       titel:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
-      beschrijving: [''],
-      //benodigdheden: this.fb.array([this.createBenodigdheden()])
+      beschrijving: ['', Validators.required],
+      benodigdheden: this.fb.array([this.createBenodigdheden()]),
       minAantal: [0],
       maxAantal: [0]
     })
@@ -36,6 +36,13 @@ export class AddSpelComponent implements OnInit {
       this.spel.value.maxAantal,
       []
     ));
-    console.log("add spel component emit" + this.spel.value.minAantal);
   }
+
+  createBenodigdheden(): FormGroup {
+    return this.fb.group({
+      aantal: [''],
+      naam: ['', Validators.required]
+    })
+  }
+
 }

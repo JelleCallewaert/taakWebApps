@@ -45,7 +45,8 @@ router.get('/API/spel/:spel', function(req, res) {
   res.json(req.spel);
 });
 
-router.delete('API/spel/:spel', function(req, res, next){
+router.delete('/API/spel/:spel', function(req, res, next){
+  console.log(req.spel);
   Benodigdheid.remove({ _id: {$in: req.spel.benodigdheden}},
     function(err){
       if(err){return next(err)}
@@ -106,6 +107,7 @@ router.post('/API/spel/:spel/doelgroepen',
 });
 
 router.param('spel', function(req, res, next, id){
+  console.log(id);
   let query = Spel.findById(id).populate('benodigdheden').populate('doelgroepen');
   query.exec(function(err, spel){
     if(err){return next(err)}

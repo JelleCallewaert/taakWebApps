@@ -11,6 +11,16 @@
   </div>
 
   <div class="field">
+    <div formArrayName='benodigdheden'>
+      <label for="benodigdheid_naam">Benodigdheden:</label>
+      <div>
+        <input type="number" id="benodigdheid_aantal" formControlName='aantal'>
+        <input type="text" id="benodigdheid_naam" formControlName='naam'>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
     <label for="minAantal">Minimum</label>
     <input type="number" id="minAantal" formControlName='minAantal'>
     <label for="maxAantal">Maximum</label>

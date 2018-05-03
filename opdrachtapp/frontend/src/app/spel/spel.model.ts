@@ -5,24 +5,24 @@ export class Spel {
     private _id: string;
     private _titel: string;
     private _beschrijving: string;
-    private _benodigdheden = new Array<Benodigdheid>();
+    private _benodigdheden: Benodigdheid[];
     private _minAantal: number;
     private _maxAantal: number;
-    private _doelgroepen = new Array<Doelgroep>();
+    private _doelgroepen: Doelgroep[];
     private _datumToegevoegd: Date;
 
     constructor(
       titel: string, 
       beschrijving: string, 
-      benodigdheden: Benodigdheid[] = [], 
+      benodigdheden?: Benodigdheid[], 
       minAantal?: number, 
       maxAantal?: number, 
-      doelgroepen: Doelgroep[] = [], 
-      datumToegevoegd: Date = null
+      doelgroepen?: Doelgroep[], 
+      datumToegevoegd?: Date
     ) {
       this._titel = titel;
       this._beschrijving = beschrijving;
-      this._benodigdheden = benodigdheden;
+      this._benodigdheden = benodigdheden || new Array();
       this._minAantal = minAantal;
       this._maxAantal = maxAantal;
       this._doelgroepen = doelgroepen;
@@ -78,10 +78,12 @@ export class Spel {
       const sp = new Spel(
         json.titel,
         json.beschrijving,
-        json.benodigdheden.map(Benodigdheid.fromJSON),
+        json.benodigdheden//.map(Benodigdheid.fromJSON)
+        ,
         json.minAantal,
         json.maxAantal,
-        json.doelgroepen.map(Doelgroep.fromJSON),
+        json.doelgroepen//.map(Doelgroep.fromJSON)
+        ,
         json.datumCreated
       );
       sp._id = json._id;
