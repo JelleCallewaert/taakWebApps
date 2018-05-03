@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Benodigdheid } from './benodigdheid.model';
 
 @Component({
   selector: 'app-benodigdheid',
@@ -7,11 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BenodigdheidComponent implements OnInit {
 
-  @Input() naam: string;
-
+  @Input() benodigdheid: Benodigdheid;
   constructor() { }
 
   ngOnInit() {
   }
-
 }

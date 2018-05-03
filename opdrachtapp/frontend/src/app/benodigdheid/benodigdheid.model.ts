@@ -12,10 +12,10 @@ export class Benodigdheid{
   get id(): string {
     return this._id;
   }
-  get name(): string {
+  get naam(): string {
     return this._naam;
   }
-  set name(name: string) {
+  set naam(name: string) {
     this._naam = name;
   }
   get aantal(): number {

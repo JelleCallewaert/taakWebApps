@@ -10,8 +10,9 @@
     <input type="text" id="beschrijving" formControlName='beschrijving'>
   </div>
 
-  <div class="field">
-    <div formArrayName='benodigdheden'>
+  <div formArrayName='benodigdheden'
+      *ngFor='let item of spel.get("benodigdheden").controls; let i = index'>
+    <div [formGroupName] = 'i'>
       <label for="benodigdheid_naam">Benodigdheden:</label>
       <div>
         <input type="number" id="benodigdheid_aantal" formControlName='aantal'>

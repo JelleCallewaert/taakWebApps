@@ -28,6 +28,7 @@ export class Spel {
       this._doelgroepen = doelgroepen;
       this._datumToegevoegd = datumToegevoegd ? datumToegevoegd : new Date();
     }
+
     get titel() : string {
       return this._titel;
     }
@@ -40,8 +41,14 @@ export class Spel {
     get minAantal() : number {
       return this._minAantal;
     }
+    set minAantal(minAantal: number) {
+      this._minAantal = minAantal;
+    }
     get maxAantal() : number {
       return this._maxAantal;
+    }
+    set maxAantal(maxAantal: number) {
+      this._maxAantal = maxAantal;
     }
     get doelgroepen() : Doelgroep[] {
       return this._doelgroepen;
@@ -53,7 +60,7 @@ export class Spel {
       return this._id;
     }
     
-    addBenodigdheden(benodigdheid: Benodigdheid) {
+    addBenodigdheid(benodigdheid: Benodigdheid) {
       this._benodigdheden.push(benodigdheid);
     }
 
