@@ -3,6 +3,7 @@
   <div class="field">
     <label for='titel'>Titel:</label>
     <input type="text" id="titel" formControlName='titel'>
+
   </div>
 
   <div class="field">
@@ -10,35 +11,34 @@
     <input type="text" id="beschrijving" formControlName='beschrijving'>
   </div>
 
-  <div formArrayName='benodigdheden'
+  <div class="field" formArrayName='benodigdheden'
       *ngFor='let item of spel.get("benodigdheden").controls; let i = index'>
     <div [formGroupName] = 'i'>
       <label for="benodigdheid_naam">Benodigdheden:</label>
-      <div>
-        <input type="number" id="benodigdheid_aantal" formControlName='aantal'>
-        <input type="text" id="benodigdheid_naam" formControlName='naam'>
-      </div>
+      <ul>
+        <li>Aantal: <input type="number" formControlName='aantal'></li>
+        <li>Item: <input type="text" formControlName='naam'></li>
+      </ul>
     </div>
   </div>
 
   <div class="field">
-    <label for="minAantal">Minimum</label>
+    <label for="minAantal">Minimum aantal kinderen:</label>
     <input type="number" id="minAantal" formControlName='minAantal'>
-    <label for="maxAantal">Maximum</label>
+    <label for="maxAantal">Maximum aantal kinderen:</label>
     <input type="number" id="maxAantal" formControlName='maxAantal'>
   </div>
 
-  <div class="field">
-    <label for='beschrijving'>Doelgroepen:</label>
-    <div>
-        <input type="checkbox" ng-model="formData.doelgroep.kl" name="doelgroep" value="kleuters"/>Kleuters <br />
-        <input type="checkbox" ng-model="formData.doelgroep.act" name="doelgroep" value="actief"/>Actief <br />
-        <input type="checkbox" ng-model="formData.doelgroep.crea" name="doelgroep" value="creatief"/>Creatief <br />
-        <input type="checkbox" ng-model="formData.doelgroep.kas" name="doelgroep" value="kastaards"/>Kastaards <br />
+  <div class="field" formArrayName='doelgroepen'
+      *ngFor='let dg of spel.get("doelgroepen").controls; let i = index'>
+    <div [formGroupName] = 'i'>
+      <label for="doelgroep_naam">Doelgroepen:</label>
+      <div *ngFor='let dg of doelgroepen'>
+        <input type="checkbox" name="doelgroepen" value="{{dg}}" /> {{dg}}
+        <input type="text" name="doelgroep_naam" value="{{dg}}" formControlName="naam">
+      </div>
     </div>
   </div>
-
-
 
   <button type="submit">Voeg Toe</button>
 </form>

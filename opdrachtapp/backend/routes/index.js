@@ -85,6 +85,26 @@ router.post('/API/spel/:spel/benodigdheden', function(req, res, next) {
   });
 });
 
+router.post('/API/spel/:spel/doelgroepen', function(req, res, next) {
+  let dg = new Doelgroep(req.body);
+
+  dg.save(function(err, doelg) {
+    if (err){
+      Doelgroep.remove({ _id: { $in: spel.doelgroepen } });
+      return next(err);
+    }
+
+    req.spel.doelgroepen.push(doelg);
+    req.spel.save(function(err, sp) {
+      if (err) {
+        Doelgroep.remove({ _id: { $in: spel.doelgroepen } });
+        return next(err)
+      }
+      res.json(doelg);
+    })
+  });
+});
+
 router.post('/API/spel/:spel/doelgroepen', 
   function(req, res, next) {
   let nodig = new Doelgroep(req.body);

@@ -13,6 +13,7 @@ import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
 export class AddSpelComponent implements OnInit {
 
   private spel : FormGroup;
+  doelgroepen = ["Kleuters", "Actief", "Creatief", "Kastaards"];
 
   @Output() public nieuwSpel = new EventEmitter<Spel>();
 
@@ -23,8 +24,8 @@ export class AddSpelComponent implements OnInit {
       titel:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       beschrijving: ['', Validators.required],
       benodigdheden: this.fb.array([this.createBenodigdheden()]),
-      minAantal: [0],
-      maxAantal: [0],
+      minAantal: [''],
+      maxAantal: [''],
       doelgroepen: this.fb.array([this.createDoelgroepen()])
     })
   }
@@ -35,9 +36,14 @@ export class AddSpelComponent implements OnInit {
       this.spel.value.beschrijving
     );
     for(const nodig of this.spel.value.benodigdheden){
-      if(nodig.naam.length > 2){
+      if(nodig.naam.length > 2 && nodig.aantal > 0){
         spel.addBenodigdheid(new Benodigdheid(nodig.naam, nodig.aantal));
       }
+    }
+    for(const dg of this.spel.value.doelgroepen){
+      
+        spel.addDoelgroep(new Doelgroep(dg.naam));
+      
     }
     spel.minAantal = this.spel.value.minAantal;
     spel.maxAantal = this.spel.value.maxAantal;

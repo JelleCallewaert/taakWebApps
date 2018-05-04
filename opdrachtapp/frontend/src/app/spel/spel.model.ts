@@ -73,10 +73,12 @@ export class Spel {
         id: this._id,
         titel: this._titel,
         beschrijving: this._beschrijving,
-        benodigdheden: this._benodigdheden,
+        benodigdheden: this._benodigdheden//.map(nodig => nodig.toJSON)
+        ,
         minAantal: this._minAantal,
         maxAantal: this._maxAantal,
-        doelgroepen: this._doelgroepen,
+        doelgroepen: this._doelgroepen//.map(doel => doel.toJSON)
+        ,
         datumCreated: this._datumToegevoegd
       };
     }
