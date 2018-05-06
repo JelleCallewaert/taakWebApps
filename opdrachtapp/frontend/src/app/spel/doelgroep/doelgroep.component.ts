@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Doelgroep } from './doelgroep.model';
 
 @Component({
   selector: 'app-doelgroep',
@@ -7,11 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DoelgroepComponent implements OnInit {
 
-  @Input() naam: string;
+  @Input() doelgroep: Doelgroep;
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

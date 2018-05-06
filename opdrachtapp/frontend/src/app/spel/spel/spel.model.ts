@@ -51,7 +51,6 @@ export class Spel {
       this._maxAantal = maxAantal;
     }
     get doelgroepen() : Doelgroep[] {
-      console.log(this._doelgroepen)
       return this._doelgroepen;
     }	
     get datumToegevoegd() : Date {

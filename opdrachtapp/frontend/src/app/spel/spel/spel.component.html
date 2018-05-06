@@ -14,18 +14,14 @@
   </div>  
 
   <div class="content">
-    <a class="ui content">Min: {{ spel.minAantal }} </a>
-  </div>
-
-  <div class="content">
-      <a class="ui content">Max: {{ spel.maxAantal }} </a>
+    <p class="ui content">Aantal: {{ spel.minAantal }} tot {{ spel.maxAantal }}</p>
   </div>
 
   <div class="content">
     Doelgroepen:
     <ul class="ui list">
       <li *ngFor='let dg of spel.doelgroepen'>
-        <app-doelgroep [naam]="dg"></app-doelgroep>
+        <app-doelgroep [doelgroep]="dg"></app-doelgroep>
       </li>
     </ul>
   </div>  

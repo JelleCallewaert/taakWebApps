@@ -9,7 +9,7 @@ export class DoelgroepFilterPipe implements PipeTransform {
   transform(spelen: Spel[], doelgroep: string): Spel[] {
     if(!doelgroep || doelgroep.length === 0) return spelen;
 
-    return spelen.filter(spel => spel.doelgroepen.find(dg => dg.dg.startsWith(doelgroep)));
+    return spelen.filter(spel => spel.doelgroepen.find(dg => dg.naam.startsWith(doelgroep)));
   }
 
 }

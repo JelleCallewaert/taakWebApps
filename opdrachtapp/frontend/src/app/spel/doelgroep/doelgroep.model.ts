@@ -21,9 +21,6 @@ export class Doelgroep{
   }
   set naam(name: string) {
     this._naam = name;
-    }
-  get dg(): string{
-    return this._naam.toString();
   }
 
   toJSON() {

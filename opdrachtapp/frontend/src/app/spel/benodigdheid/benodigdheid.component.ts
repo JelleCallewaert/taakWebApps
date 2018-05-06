@@ -9,6 +9,7 @@ import { Benodigdheid } from './benodigdheid.model';
 export class BenodigdheidComponent implements OnInit {
 
   @Input() benodigdheid: Benodigdheid;
+  
   constructor() { }
 
   ngOnInit() {
