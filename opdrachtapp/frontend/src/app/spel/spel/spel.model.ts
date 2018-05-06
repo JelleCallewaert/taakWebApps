@@ -25,7 +25,7 @@ export class Spel {
       this._benodigdheden = benodigdheden || new Array();
       this._minAantal = minAantal;
       this._maxAantal = maxAantal;
-      this._doelgroepen = doelgroepen;
+      this._doelgroepen = doelgroepen || new Array();
       this._datumToegevoegd = datumToegevoegd ? datumToegevoegd : new Date();
     }
 
@@ -51,6 +51,7 @@ export class Spel {
       this._maxAantal = maxAantal;
     }
     get doelgroepen() : Doelgroep[] {
+      console.log(this._doelgroepen)
       return this._doelgroepen;
     }	
     get datumToegevoegd() : Date {

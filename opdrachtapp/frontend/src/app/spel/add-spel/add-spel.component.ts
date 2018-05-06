@@ -1,9 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Spel } from '../spel/spel.model';
-import { SpelDataService } from '../spel-data.service';
+import { SpelDataService } from '../../spel-data.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Doelgroep} from '../doelgroep/doelgroep.model';
 import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-spel',
@@ -14,6 +15,7 @@ export class AddSpelComponent implements OnInit {
 
   private spel : FormGroup;
   doelgroepen = ["Kleuters", "Actief", "Creatief", "Kastaards"];
+  errorMsg: string;
 
   @Output() public nieuwSpel = new EventEmitter<Spel>();
 
@@ -31,23 +33,31 @@ export class AddSpelComponent implements OnInit {
   }
 
   onSubmit(){
-    const spel = new Spel(
+    const sp = new Spel(
       this.spel.value.titel, 
       this.spel.value.beschrijving
     );
     for(const nodig of this.spel.value.benodigdheden){
       if(nodig.naam.length > 2 && nodig.aantal > 0){
-        spel.addBenodigdheid(new Benodigdheid(nodig.naam, nodig.aantal));
+        sp.addBenodigdheid(new Benodigdheid(nodig.naam, nodig.aantal));
       }
     }
     for(const dg of this.spel.value.doelgroepen){
       
-        spel.addDoelgroep(new Doelgroep(dg.naam));
+        sp.addDoelgroep(new Doelgroep(dg.naam));
       
     }
-    spel.minAantal = this.spel.value.minAantal;
-    spel.maxAantal = this.spel.value.maxAantal;
-    this.nieuwSpel.emit(spel);
+    sp.minAantal = this.spel.value.minAantal;
+    sp.maxAantal = this.spel.value.maxAantal;
+
+    this._spelDataService.voegNieuwSpelToe(sp).subscribe(
+      () => {},
+      (error: HttpErrorResponse) => {
+        this.errorMsg = `Error ${error.status} tijdens het toevoegen van het
+          spel ${sp.titel}: ${error.error}`;
+      }
+    );
+    this.spel.reset();
   }
 
   createBenodigdheden(): FormGroup {

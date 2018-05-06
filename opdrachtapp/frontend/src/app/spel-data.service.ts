@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Spel } from './spel/spel.model';
+import { Spel } from './spel/spel/spel.model';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { map } from 'rxjs/operators';
-import { Benodigdheid } from './benodigdheid/benodigdheid.model';
+import { Benodigdheid } from './spel/benodigdheid/benodigdheid.model';
 
 @Injectable()
 export class SpelDataService {

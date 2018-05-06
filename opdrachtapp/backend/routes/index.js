@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/API/spelen/', function(req, res, next){
-  let query = Spel.find().populate('benodigdheden');
+  let query = Spel.find().populate('benodigdheden').populate('doelgroepen');
   query.exec(function(err, spelen){
     if(err){return next(err)}
     res.json(spelen)
@@ -19,26 +19,35 @@ router.get('/API/spelen/', function(req, res, next){
 });
 
 router.post('/API/spelen/', function(req, res, next){
-  Benodigdheid.create(req.body.benodigdheden, function(err, nodigs){
-    if(err) {return next(err)}
-  
-    let spel = new Spel({
-        titel: req.body.titel,
-        beschrijving: req.body.beschrijving,
-        minAantal: req.body.minAantal,
-        maxAantal: req.body.maxAantal,
-        datumCreated: req.body.datumCreated
-        
+
+  Doelgroep.create(req.body.doelgroepen, function(err, dgs){
+    if(err){return next(err)}
+    
+    Benodigdheid.create(req.body.benodigdheden, function(err, nodigs){
+      if(err) {return next(err)}
+    
+      let spel = new Spel({
+          titel: req.body.titel,
+          beschrijving: req.body.beschrijving,
+          minAantal: req.body.minAantal,
+          maxAantal: req.body.maxAantal,
+          datumCreated: req.body.datumCreated
+          
+      });
+      spel.benodigdheden = nodigs;
+      spel.doelgroepen = dgs;
+      spel.save(function(err, sp){
+        if(err){
+          Benodigdheid.remove({_id : {$in: spel.benodigdheden}})
+          return next(err)
+        }
+        res.json(sp);
+      });
     });
-    spel.benodigdheden = nodigs;
-    spel.save(function(err, sp){
-      if(err){
-        Benodigdheid.remove({_id : {$in: spel.benodigdheden}})
-        return next(err)
-      }
-      res.json(sp);
-    });
-  });
+  })
+    
+
+
 });
 
 router.get('/API/spel/:spel', function(req, res) {

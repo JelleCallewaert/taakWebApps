@@ -1,0 +1,20 @@
+<div class="ui segment">
+  <div class="ui field">
+    <h3>Filter op Doelgroep:</h3>
+    <select class="ui fluid dropdown">
+      <option value="">Alles</option>
+      <option value="kl">Kleuters</option>
+      <option value="cr">Creatief</option>
+      <option value="ac">Actief</option>
+      <option value="ka">Kastaards</option>
+    </select>
+  </div> 
+  <div class="ui field" style="margin-top: 1em">
+    <h3>Alle Spelen:</h3>
+  </div>
+  <div class="ui field" style="margin-top: 2em">
+    <div class="ui cards">
+      <app-spel *ngFor='let localSpel of spelen | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel' (deleteSpel)='removeSpel($event)'></app-spel>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Spel } from './spel/spel.model';
+import { Spel } from './spel/spel/spel.model';
 
 @Pipe({
   name: 'doelgroepFilter'

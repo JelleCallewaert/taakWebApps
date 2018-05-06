@@ -35,7 +35,6 @@
       <label for="doelgroep_naam">Doelgroepen:</label>
       <div *ngFor='let dg of doelgroepen'>
         <input type="checkbox" name="doelgroepen" value="{{dg}}" /> {{dg}}
-        <input type="text" name="doelgroep_naam" value="{{dg}}" formControlName="naam">
       </div>
     </div>
   </div>
