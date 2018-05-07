@@ -20,6 +20,4 @@ export class SpelComponent implements OnInit {
   removeSpel(){
     this.deleteSpel.emit(this.spel);
   }
-  
-
 }

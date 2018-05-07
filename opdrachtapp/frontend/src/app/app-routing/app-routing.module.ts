@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SpelLijstComponent } from '../spel/spel-lijst/spel-lijst.component';
-import { AddSpelComponent } from '../spel/add-spel/add-spel.component';
+
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { SpelModule } from '../spel/spel.module';
 
 const appRoutes: Routes = [
-  { path: 'spel-lijst', component: SpelLijstComponent },
-  { path: 'add-spel', component: AddSpelComponent },
-  { path: '', redirectTo: 'spel-lijst', pathMatch: 'full' },
+  { path: '', redirectTo: 'spel/spel-lijst', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    SpelModule
   ],
   declarations: [],
   exports: [ RouterModule ]
