@@ -1,35 +1,19 @@
-<div class="ui card">
-  <div class="content">
-    <a class="header" href='/spel/{{spel.id}}'>{{ spel.titel }}</a>
-    <a class="ui content"> {{ spel.beschrijving }}</a>
+  <div class="ui card" style="margin-bottom: 1em; margin-right: 1em">
+    <div class="content">
+      <a class="header" href='/spel-detail/{{spel.id}}'>{{ spel.titel }}</a>
+      <p class="ui content blue"> {{ spel.beschrijving }}</p>
+    </div>
+    <div class="content">
+      Doelgroepen:
+      <ul class="ui list">
+        <li *ngFor='let dg of spel.doelgroepen'>
+          <app-doelgroep [doelgroep]="dg"></app-doelgroep>
+        </li>
+      </ul>
+    </div> 
+      
+  
+    <button class="ui icon button" (click)="removeSpel()">
+      <i class="trash outline icon"></i>
+    </button> 
   </div>
-
-  <button class="ui icon button" (click)="removeSpel()">
-    <i class="trash outline icon"></i>
-  </button>
-
-  <div class="content">
-    Benodigdheden:
-    <ul class="ui list">
-      <li *ngFor='let nodig of spel.benodigdheden'>
-        <app-benodigdheid [benodigdheid]="nodig"></app-benodigdheid>
-      </li>
-    </ul>
-  </div>  
-
-  <div class="content">
-    <p class="ui content">Aantal: {{ spel.minAantal }} tot {{ spel.maxAantal }}</p>
-  </div>
-
-  <div class="content">
-    Doelgroepen:
-    <ul class="ui list">
-      <li *ngFor='let dg of spel.doelgroepen'>
-        <app-doelgroep [doelgroep]="dg"></app-doelgroep>
-      </li>
-    </ul>
-  </div>  
-  <div class="content">
-  <p><i>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</i></p>
-  </div>
-</div>

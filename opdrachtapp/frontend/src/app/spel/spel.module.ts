@@ -13,11 +13,13 @@ import { PageNotFoundComponent } from "../page-not-found/page-not-found.componen
 import { AddSpelComponent } from "./add-spel/add-spel.component";
 import { SpelLijstComponent } from "./spel-lijst/spel-lijst.component";
 import { DoelgroepFilterPipe } from "./doelgroep-filter.pipe";
+import { SpelDetailComponent } from './spel-detail/spel-detail.component';
+import { SpelResolver } from "./spel-resolver";
 
 const appRoutes = [
     { path: 'spel-lijst', component: SpelLijstComponent },
     { path: 'add-spel', component: AddSpelComponent },
-    { path: ':id', component: SpelComponent }
+    { path: 'spel-detail/:id', component: SpelDetailComponent, resolve: { spel: SpelResolver} }
   ]
 
 @NgModule({  
@@ -27,7 +29,8 @@ const appRoutes = [
     DoelgroepComponent,
     AddSpelComponent,
     SpelLijstComponent,
-    DoelgroepFilterPipe
+    DoelgroepFilterPipe,
+    SpelDetailComponent
   ],
   imports: [
       HttpClientModule,
@@ -36,7 +39,8 @@ const appRoutes = [
       RouterModule.forChild(appRoutes)
     ],
     providers: [
-        SpelDataService
+        SpelDataService,
+        SpelResolver
     ]
   })
   export class SpelModule { }
