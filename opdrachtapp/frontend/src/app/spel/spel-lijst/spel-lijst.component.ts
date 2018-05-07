@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Spel } from '../spel/spel.model';
-import { SpelDataService } from '../../spel-data.service';
+import { Spel } from '../spel.model';
+import { SpelDataService } from '../spel-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 

@@ -4,6 +4,10 @@
     <a class="ui content"> {{ spel.beschrijving }}</a>
   </div>
 
+  <button class="ui icon button" (click)="removeSpel()">
+    <i class="trash outline icon"></i>
+  </button>
+
   <div class="content">
     Benodigdheden:
     <ul class="ui list">
@@ -28,7 +32,4 @@
   <div class="content">
   <p><i>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</i></p>
   </div>
-  <button class="ui icon button" (click)="removeSpel()">
-    <i class="trash outline icon"></i>
-  </button>
 </div>

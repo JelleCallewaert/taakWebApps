@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Spel } from '../spel/spel.model';
-import { SpelDataService } from '../../spel-data.service';
+import { Spel } from '../spel.model';
+import { SpelDataService } from '../spel-data.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Doelgroep} from '../doelgroep/doelgroep.model';
 import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
@@ -9,7 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-add-spel',
   templateUrl: './add-spel.component.html',
-  styleUrls: ['./add-spel.component.css']
+  styleUrls: ['./add-spel.component.css'],
+  providers: [ SpelDataService ]
 })
 export class AddSpelComponent implements OnInit {
 

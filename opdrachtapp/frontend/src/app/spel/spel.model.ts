@@ -1,5 +1,5 @@
-import { Doelgroep } from '../doelgroep/doelgroep.model';
-import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
+import { Doelgroep } from '../spel/doelgroep/doelgroep.model';
+import { Benodigdheid } from '../spel/benodigdheid/benodigdheid.model';
 
 export class Spel {
     private _id: string;

@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { SpelComponent } from './spel/spel/spel.component';
 import { BenodigdheidComponent } from './spel/benodigdheid/benodigdheid.component';
 import { AddSpelComponent } from './spel/add-spel/add-spel.component';
-import { DoelgroepFilterPipe } from './doelgroep-filter.pipe';
+import { DoelgroepFilterPipe } from './spel/doelgroep-filter.pipe';
 import { DoelgroepComponent } from './spel/doelgroep/doelgroep.component';
 import { AppComponent } from './app.component';
 import { SpelLijstComponent } from './spel/spel-lijst/spel-lijst.component';
