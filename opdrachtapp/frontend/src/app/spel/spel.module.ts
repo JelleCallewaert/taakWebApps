@@ -17,9 +17,9 @@ import { SpelDetailComponent } from './spel-detail/spel-detail.component';
 import { SpelResolver } from "./spel-resolver";
 
 const appRoutes = [
-    { path: 'spel-lijst', component: SpelLijstComponent },
-    { path: 'add-spel', component: AddSpelComponent },
-    { path: 'spel-detail/:id', component: SpelDetailComponent, resolve: { spel: SpelResolver} }
+    { path: 'spel/lijst', component: SpelLijstComponent },
+    { path: 'spel/nieuw', component: AddSpelComponent },
+    { path: 'spel/detail/:id', component: SpelDetailComponent, resolve: { spel: SpelResolver} }
   ]
 
 @NgModule({  

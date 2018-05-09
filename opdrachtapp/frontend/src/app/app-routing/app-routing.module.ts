@@ -5,7 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'spel-lijst', pathMatch: 'full' },
+  {
+    path: 'spel',
+    loadChildren: 'app/spel/spel.module#SpelModule'
+  },
+  { path: '', redirectTo: 'spel/lijst', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
 

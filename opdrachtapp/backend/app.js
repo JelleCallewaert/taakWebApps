@@ -5,9 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
+let passport = require('passport');
+
 require('./models/Spel');
 require('./models/Benodigdheid');
 require('./models/Doelgroep');
+require('./models/User');
+require('./config/passport');
 
 mongoose.connect('mongodb://localhost/speldb');
 
@@ -21,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
