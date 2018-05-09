@@ -1,19 +1,23 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
 
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+
+var mongoose = require('mongoose');
 let passport = require('passport');
+
+
+
+
+mongoose.connect('mongodb://localhost/speldb');
 
 require('./models/Spel');
 require('./models/Benodigdheid');
 require('./models/Doelgroep');
 require('./models/User');
 require('./config/passport');
-
-mongoose.connect('mongodb://localhost/speldb');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

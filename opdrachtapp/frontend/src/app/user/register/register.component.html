@@ -1,0 +1,40 @@
+<div class="field">
+  <label for="username">Gebruikersnaam:</label>
+  <input type="text" id="username" formControlName='username'>
+  <div *ngIf='user.get("username").errors?.userAlreadyExists 
+    && user.get("username").touched'>
+      Deze naam is al in gebruik.
+  </div>
+  <div *ngIf='user.get("username").errors?.minlength 
+    && user.get("username").touched'>
+      Gelieve een naam te kiezen van minstens {{user.get("username").errors?.minlength.requiredLength }} letters.
+  </div>
+  <div *ngIf='user.get("username").errors?.required 
+    && user.get("username").touched'>
+      Gelieve een naam in te vullen.
+  </div>
+  <div *ngIf='user.get("username").errors?.userAlreadyExists 
+    && user.get("username").touched'>
+      Deze naam is al in gebruik.
+  </div>
+</div>
+<div class="field">
+  <label for="password">Wachtwoord:</label>
+  <input type="password" id="password" formControlName='password'>
+  <div *ngIf='user.get("password").errors?.minlength 
+    && user.get("username").touched'>
+      Gelieve een wachtwoord te kiezen van minstens {{passwordControl.errors?.passwordTooShort.requiredLength }} tekens. ({{passwordControl.errors?.passwordTooShort.actualLength}})
+  </div>
+  <div *ngIf='user.get("password").errors?.required 
+    && user.get("username").touched'>
+      Gelieve een wachtwoord in te vullen van minstens {{passwordControl.errors?.passwordTooShort.requiredLength }} tekens. ({{passwordControl.errors?.passwordTooShort.actualLength}})
+  </div>
+</div>
+<div class="field">
+  <label for="confirmpassword">Herhaal wachtwoord:</label>
+  <input type="password" id="confirmpassword" formControlName='confirmPassword'>
+  <div *ngIf=' user.get("passwordGroup").errors?.passwordsDiffer && user.get("passwordGroup").get("confirmPassword").touched  
+    && user.get("passwordGroup").get("password").touched'>
+      Wachtwoorden zijn niet gelijk!
+  </div>
+</div>

@@ -8,9 +8,7 @@ let Benodigdheid = mongoose.model('Benodigdheid');
 let Doelgroep = mongoose.model('Doelgroep');
 let jwt = require('express-jwt');
 
-let auth = jwt({
-  secret: process.env.SPEL_BACKEND_SECRET
-});
+let auth = jwt({secret: process.env.SPEL_BACKEND_SECRET});
 
 
 router.get('/', function(req, res, next) {
@@ -25,7 +23,7 @@ router.get('/API/spelen/', function(req, res, next){
   });
 });
 
-router.post('/API/spelen/',  function(req, res, next){
+router.post('/API/spelen/', auth, function(req, res, next){
 
   Doelgroep.create(req.body.doelgroepen, function(err, dgs){
     if(err){return next(err)}
