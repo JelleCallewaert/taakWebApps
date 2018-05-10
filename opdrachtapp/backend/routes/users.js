@@ -6,7 +6,7 @@ let passport = require('passport');
 
 router.post('/register', function(req, res, next) {
   if (!req.body.username || !req.body.password) {
-    return res.status(400).json({ message: 'Please fill out all fields' });
+    return res.status(400).json({ message: 'Alle velden moeten ingevuld zijn.' });
   }
   let user = new User();
   user.username = req.body.username;
@@ -21,7 +21,7 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   if (!req.body.username || !req.body.password) {
-    return res.status(400).json({ message: 'Please fill out all fields' });
+    return res.status(400).json({ message: 'Alle velden moeten ingevuld zijn.' });
   }
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -36,6 +36,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.post('/checkusername', function(req, res, next) {
+  console.log('checkusername')
   User.find({ username: req.body.username }, function(err, result) {
     if (result.length) {
       res.json({ username: 'alreadyexists' });

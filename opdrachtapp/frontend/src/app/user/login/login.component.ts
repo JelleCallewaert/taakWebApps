@@ -51,19 +51,19 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = undefined;
             } else {
-              this.router.navigate(['/recipe/list']);
+              this.router.navigate(['/spel/lijst']);
             }
           } else {
-            this.errorMsg = `Could not login`;
+            this.errorMsg = `Kon niet inloggen`;
           }
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
-            this.errorMsg = `Error while trying to login user ${
+            this.errorMsg = `Error bij inloggen van ${
               this.user.value.username
             }: ${err.error.message}`;
           } else {
-            this.errorMsg = `Error ${err.status} while trying to login user ${
+            this.errorMsg = `Error ${err.status} bij inloggen van ${
               this.user.value.username
             }: ${err.error}`;
           }

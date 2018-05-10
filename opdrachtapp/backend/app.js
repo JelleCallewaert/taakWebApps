@@ -1,17 +1,15 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 let passport = require('passport');
 
-
-
-
-mongoose.connect('mongodb://localhost/speldb');
+mongoose.connect(
+  'mongodb://localhost/speldb'
+);
 
 require('./models/Spel');
 require('./models/Benodigdheid');
@@ -32,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/API/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

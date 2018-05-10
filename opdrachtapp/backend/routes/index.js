@@ -1,19 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
 let mongoose = require('mongoose');
 let Spel = mongoose.model('Spel');
-let User = mongoose.model('User');
 let Benodigdheid = mongoose.model('Benodigdheid');
 let Doelgroep = mongoose.model('Doelgroep');
 let jwt = require('express-jwt');
 
 let auth = jwt({secret: process.env.SPEL_BACKEND_SECRET});
-
-
-router.get('/', function(req, res, next) {
-  res.send('server works');
-});
 
 router.get('/API/spelen/', function(req, res, next){
   let query = Spel.find().populate('benodigdheden').populate('doelgroepen');
@@ -50,17 +43,13 @@ router.post('/API/spelen/', auth, function(req, res, next){
       });
     });
   })
-    
-
-
 });
 
 router.get('/API/spel/:spel', function(req, res) {
   res.json(req.spel);
 });
 
-router.delete('/API/spel/:spel', function(req, res, next){
-  console.log(req.spel);
+router.delete('/API/spel/:spel', auth, function(req, res, next){
   Benodigdheid.remove({ _id: {$in: req.spel.benodigdheden}},
     function(err){
       if(err){return next(err)}
@@ -71,14 +60,6 @@ router.delete('/API/spel/:spel', function(req, res, next){
     });
 });
 
-/*
-router.get('API/spel/:spel', function(req, res, next){
-  req.spel.save(function(err){
-    if(err){return next(err)}
-    res.json("changed spel");
-  });
-});
-*/
 router.post('/API/spel/:spel/benodigdheden', function(req, res, next) {
   let nodig = new Benodigdheid(req.body);
 
@@ -115,27 +96,6 @@ router.post('/API/spel/:spel/doelgroepen', function(req, res, next) {
         return next(err)
       }
       res.json(doelg);
-    })
-  });
-});
-
-router.post('/API/spel/:spel/doelgroepen', 
-  function(req, res, next) {
-  let nodig = new Doelgroep(req.body);
-
-  nodig.save(function(err, dg) {
-    if (err){
-      Benodigdheid.remove({ _id: { $in: spel.doelgroepen } });
-      return next(err);
-    }
-
-    req.spel.doelgroepen.push(dg);
-    req.spel.save(function(err, sp) {
-      if (err) {
-        Doelgroep.remove({ _id: { $in: spel.doelgroepen } });
-        return next(err)
-      }
-      res.json(dg);
     })
   });
 });

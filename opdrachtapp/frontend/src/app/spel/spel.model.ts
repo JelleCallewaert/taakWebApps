@@ -10,6 +10,7 @@ export class Spel {
     private _maxAantal: number;
     private _doelgroepen: Doelgroep[];
     private _datumToegevoegd: Date;
+    private _auteur: string;
 
     constructor(
       titel: string, 
@@ -79,7 +80,8 @@ export class Spel {
         maxAantal: this._maxAantal,
         doelgroepen: this._doelgroepen//.map(doel => doel.toJSON)
         ,
-        datumCreated: this._datumToegevoegd
+        datumCreated: this._datumToegevoegd,
+        auteur: this._auteur
       };
     }
 
@@ -96,6 +98,7 @@ export class Spel {
         json.datumCreated
       );
       sp._id = json._id;
+      sp._auteur = json.auteur;
       return sp;
     }
   }

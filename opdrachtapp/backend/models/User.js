@@ -36,7 +36,7 @@ UserSchema.methods.generateJWT = function() {
       username: this.username,
       exp: parseInt(exp.getTime() / 1000)
     },
-    process.env.RECIPE_BACKEND_SECRET
+    process.env.SPEL_BACKEND_SECRET
   );
 };
 

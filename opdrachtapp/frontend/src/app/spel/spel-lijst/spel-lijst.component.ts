@@ -17,6 +17,9 @@ export class SpelLijstComponent implements OnInit {
   public filterSpelDoelgroep: string;
   public filterSpel$ = new Subject<string>();
 
+  applyFilter(filter: string) {
+    this.filterSpelDoelgroep = filter;
+  }
 
   constructor(private _spelDataService : SpelDataService) {
     this.filterSpel$.subscribe(val => (this.filterSpelDoelgroep = val))
