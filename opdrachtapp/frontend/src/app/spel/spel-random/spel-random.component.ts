@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Spel } from '../spel.model';
+import { SpelDataService } from '../spel-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-spel-random',
@@ -7,9 +10,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpelRandomComponent implements OnInit {
 
-  constructor() { }
+  private _spel : Spel = null;
+  private _int : number;
+  private _spelen : Spel[] = new Array();
+  private _errorMsg : string;
+
+  constructor(private _spelDataService : SpelDataService) { }
 
   ngOnInit() {
+    this._spelDataService.spelen.subscribe(
+      spelen => (this._spelen = spelen),
+      (error: HttpErrorResponse) => {
+        this._errorMsg = `Error ${
+          error.status
+        } bij het ophalen van de spelen: ${error.error}`;
+      }
+    );
+  }
+
+  get spel(){
+    
+    console.log("id =" + this._spel.id)
+    return this._spel;
+  }
+  set spel(spel: Spel){
+    this._spel = spel;
+  }
+  get spelen(){
+    return this._spelen;
+  }
+  set spelen(spelen: Spel[]){
+    this._spelen = spelen;
+  }
+  
+  randomSpel(){
+    console.log("random");
+    this._int = Math.floor(Math.random() * this._spelen.length);
+    this._spel = this._spelen[this._int];
   }
 
 }
