@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 let BenodigdheidSchema = new mongoose.Schema({
   naam: String,
-  aantal: {type: Number, default: 1}
+  aantal: {type: Number}
 });	
 BenodigdheidSchema.pre('remove', function (next) {
   this.model('Spel').update(

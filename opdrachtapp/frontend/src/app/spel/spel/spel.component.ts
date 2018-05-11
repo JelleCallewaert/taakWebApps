@@ -10,6 +10,7 @@ export class SpelComponent implements OnInit {
 
   @Input() public spel: Spel;
   @Output() public deleteSpel = new EventEmitter<Spel>();
+  @Output() public randomSpel = new EventEmitter<Spel>();
 
   constructor() {
   }
@@ -19,5 +20,9 @@ export class SpelComponent implements OnInit {
 
   removeSpel(){
     this.deleteSpel.emit(this.spel);
+  }
+
+  getRandomSpel(){
+    this.randomSpel.emit(this.spel);
   }
 }

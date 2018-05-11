@@ -60,6 +60,9 @@ export class Spel {
     get id() : string {
       return this._id;
     }
+    set id(id : string){
+      this._id = id;
+    }
     
     addBenodigdheid(benodigdheid: Benodigdheid) {
       this._benodigdheden.push(benodigdheid);

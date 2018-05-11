@@ -26,11 +26,10 @@ export class SpelRandomComponent implements OnInit {
         } bij het ophalen van de spelen: ${error.error}`;
       }
     );
+    this.getRandomSpel();
   }
 
   get spel(){
-    
-    console.log("id =" + this._spel.id)
     return this._spel;
   }
   set spel(spel: Spel){
@@ -43,8 +42,7 @@ export class SpelRandomComponent implements OnInit {
     this._spelen = spelen;
   }
   
-  randomSpel(){
-    console.log("random");
+  getRandomSpel(){
     this._int = Math.floor(Math.random() * this._spelen.length);
     this._spel = this._spelen[this._int];
   }

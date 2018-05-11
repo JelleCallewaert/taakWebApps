@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Spel } from '../spel.model';
@@ -16,10 +16,18 @@ import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
 export class AddSpelComponent implements OnInit {
 
   private spel : FormGroup;
-  public readonly alleDoelgroepen = ["Alles", "Kleuters", "Actief", "Creatief", "Kastaards"];
-  errorMsg: string;
+  public  alleDoelgroepen = ["Alles", "Kleuters", "Actief", "Creatief", "Kastaards"];
+  public errorMsg: string;
 
   @Output() public nieuwSpel = new EventEmitter<Spel>();
+
+  get benodigdheden(): FormArray{
+    return <FormArray>this.spel.get('benodigdheden');
+  }
+
+  get doelgroepen(): FormArray{
+    return <FormArray>this.spel.get('doelgroepen');
+  }
 
   constructor(private _spelDataService: SpelDataService, private fb: FormBuilder) { }
 
@@ -31,7 +39,34 @@ export class AddSpelComponent implements OnInit {
       minAantal: ['0', [Validators.max(99), Validators.min(0)]],
       maxAantal: ['0', [Validators.max(99), Validators.min(0)]],
       doelgroepen: this.fb.array([this.createDoelgroepen()])
-    })
+    });
+
+    this.benodigdheden.valueChanges
+      .subscribe(nodigLijst => {
+        const lastElem = nodigLijst[nodigLijst.length - 1];
+        if(lastElem.naam && lastElem.naam.length > 1){
+          this.benodigdheden.push(this.createBenodigdheden());
+        }else if (nodigLijst.length >= 2) {
+          const secondToLast = nodigLijst[nodigLijst.length - 2];
+          if (
+            !lastElem.naam && lastElem.aantal != 0 &&
+            (!secondToLast.naam || secondToLast.naam.length < 2)
+          ) {
+            this.benodigdheden.removeAt(this.benodigdheden.length - 1);
+          }
+        }
+      });
+
+    this.doelgroepen.valueChanges
+      .subscribe(dgLijst => {
+        const lastElem = dgLijst[dgLijst.length - 1];
+        let hulpArray = new Array();
+        if(lastElem.naam && lastElem.naam != "Alles"){
+          //als er iets geselecteerd is dat niet 'Alles' is: nieuwe dropdown
+          this.doelgroepen.push(this.createDoelgroepen());
+        }
+      })
+
   }
 
   onSubmit(){
@@ -42,12 +77,14 @@ export class AddSpelComponent implements OnInit {
         this.spel.value.beschrijving
       );
       for(const nodig of this.spel.value.benodigdheden){
-        if(nodig.naam.length > 2 && nodig.aantal > 0){
+        if(nodig.naam.length > 1 && nodig.aantal > 0){
           sp.addBenodigdheid(new Benodigdheid(nodig.naam, nodig.aantal));
+        }else if(nodig.naam.length > 1){
+          sp.addBenodigdheid(new Benodigdheid(nodig.naam));
         }
       }
       for(const dg of this.spel.value.doelgroepen){
-        
+        if(dg.naam.length > 1)
           sp.addDoelgroep(new Doelgroep(dg.naam));
         
       }
@@ -67,16 +104,17 @@ export class AddSpelComponent implements OnInit {
 
   createBenodigdheden(): FormGroup {
     return this.fb.group({
-      aantal: ['0', [Validators.min(0), Validators.max(99)]],
+      aantal: ['', [Validators.min(0), Validators.max(99)]],
       naam: ['', [Validators.minLength(2)]]
     })
   }
 
   createDoelgroepen(): FormGroup {
     return this.fb.group({
-      naam: ['Alles']
+      naam: ['']
     })
   }
+
 
   controleerNieuwSpel(): boolean{
     let flag: boolean = true;

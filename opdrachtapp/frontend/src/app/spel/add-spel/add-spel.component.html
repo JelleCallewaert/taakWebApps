@@ -1,13 +1,14 @@
 <div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
   <form class="ui form" [formGroup]='spel' (ngSubmit)='onSubmit()'>
     <h3 class="ui header">Voeg Spel Toe</h3>
     <div class="field">
       <label for='titel'>Titel:</label>
       <input type="text" id="titel" formControlName='titel'>
-        <div *ngIf='(spel.get("titel").errors?.required || spel.get("titel").errors?.minlength || spel.get("titel").errors?.maxlength)'>
+        <div *ngIf='spel.get("titel").errors?.required || spel.get("titel").errors?.maxlength || spel.get("titel").errors?.minlength'>
           <div *ngIf='spel.get("titel").touched'>
-            <p class="wrongInput">Gelieve een titel in te vullen tussen 3 en 32 letters!</p>
-          </div>   
+            <p class="wrongInput">Gelieve een acceptabele titel in te vullen!</p>
+          </div>
         </div>
     </div>
 
@@ -15,20 +16,18 @@
       <label for="beschrijving">Beschrijving:</label>
       <input type="text" id="beschrijving" formControlName='beschrijving'>
       <div *ngIf='spel.get("beschrijving").errors?.required'>
-          <div *ngIf='spel.get("beschrijving").touched'>
-              <p class="wrongInput">Gelieve een beschrijving in te vullen!</p>
-          </div>
+        <div *ngIf='spel.get("beschrijving").touched'>
+          <p class="wrongInput">Gelieve een beschrijving in te vullen!</p>
         </div>
+      </div>
     </div>
 
+    <label for="benodigdheid_naam">Benodigdheden:</label>
     <div class="field" formArrayName='benodigdheden'
-        *ngFor='let item of spel.get("benodigdheden").controls; let i = index'>
+        *ngFor='let item of benodigdheden.controls; let i = index'>
       <div [formGroupName] = 'i'>
-        <label for="benodigdheid_naam">Benodigdheden:</label>
-        <ul>
-          <li>Aantal: <input type="number" formControlName='aantal'></li>
-          <li>Item: <input type="text" formControlName='naam'></li>
-        </ul>
+        <input type="number" formControlName='aantal' placeholder="aantal">
+        <input type="text" formControlName='naam' placeholder="item">
       </div>
     </div>
 
@@ -51,12 +50,14 @@
 
     <div class="field">
       <label for="doelgroep_naam">Doelgroepen:</label>
-      <div formArrayName="doelgroepen" *ngFor='let item of spel.get("doelgroepen").controls; let i = index'>
+      <div formArrayName="doelgroepen" *ngFor='let item of doelgroepen.controls; let i = index'>
         <div [formGroupName]="i">
           <div class="field">
             <select class='ui fluid dropdown' id="doelgroep_naam" formControlName='naam'>
               <option *ngFor='let dg of alleDoelgroepen' [value]='dg'>
-                {{dg}}
+                <div>
+                  {{dg}}
+                </div>
               </option>
             </select>
           </div>
