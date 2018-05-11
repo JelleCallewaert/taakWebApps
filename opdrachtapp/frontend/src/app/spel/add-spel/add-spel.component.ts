@@ -16,7 +16,8 @@ import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
 export class AddSpelComponent implements OnInit {
 
   private spel : FormGroup;
-  public  alleDoelgroepen = ["Alles", "Kleuters", "Actief", "Creatief", "Kastaards"];
+  public alleDoelgroepen = ["Kleuters", "Actief", "Creatief", "Kastaards"];
+  public usedDoelgroepen = [];
   public errorMsg: string;
 
   @Output() public nieuwSpel = new EventEmitter<Spel>();
@@ -61,9 +62,11 @@ export class AddSpelComponent implements OnInit {
       .subscribe(dgLijst => {
         const lastElem = dgLijst[dgLijst.length - 1];
         let hulpArray = new Array();
-        if(lastElem.naam && lastElem.naam != "Alles"){
+        if(lastElem.naam && lastElem.naam != "Alles" && this.usedDoelgroepen.length < 3){
           //als er iets geselecteerd is dat niet 'Alles' is: nieuwe dropdown
           this.doelgroepen.push(this.createDoelgroepen());
+          //toevoegen aan usedDoelgroepen;
+          this.usedDoelgroepen.push(lastElem.naam);
         }
       })
 

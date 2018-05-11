@@ -54,7 +54,7 @@
         <div [formGroupName]="i">
           <div class="field">
             <select class='ui fluid dropdown' id="doelgroep_naam" formControlName='naam'>
-              <option *ngFor='let dg of alleDoelgroepen' [value]='dg'>
+              <option *ngFor='let dg of alleDoelgroepen | usedDoelgroepFilter : usedDoelgroepen' [value]='dg'>
                 <div>
                   {{dg}}
                 </div>

@@ -17,6 +17,7 @@ import { SpelDetailComponent } from './spel-detail/spel-detail.component';
 import { SpelResolver } from "./spel-resolver";
 import { httpInterceptorProviders } from "../http-interceptors";
 import { SpelRandomComponent } from './spel-random/spel-random.component';
+import { UsedDoelgroepFilterPipe } from './used-doelgroep-filter.pipe';
 
 const appRoutes = [
     { path: 'lijst', component: SpelLijstComponent },
@@ -37,7 +38,8 @@ const appRoutes = [
     SpelLijstComponent,
     DoelgroepFilterPipe,
     SpelDetailComponent,
-    SpelRandomComponent
+    SpelRandomComponent,
+    UsedDoelgroepFilterPipe
   ],
   imports: [
       HttpClientModule,
