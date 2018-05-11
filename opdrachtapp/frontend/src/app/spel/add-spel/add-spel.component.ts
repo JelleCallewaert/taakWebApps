@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Spel } from '../spel.model';
@@ -30,16 +30,24 @@ export class AddSpelComponent implements OnInit {
     return <FormArray>this.spel.get('doelgroepen');
   }
 
+  get minAantal(): FormControl{
+    return <FormControl>this.spel.get('minAantal');
+  }
+
+  get maxAantal(): FormControl{
+    return <FormControl>this.spel.get('maxAantal');
+  }
+
   constructor(private _spelDataService: SpelDataService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.spel = this.fb.group({
-      titel:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
-      beschrijving: ['', Validators.required],
-      benodigdheden: this.fb.array([this.createBenodigdheden()]),
-      minAantal: ['0', [Validators.max(99), Validators.min(0)]],
-      maxAantal: ['0', [Validators.max(99), Validators.min(0)]],
-      doelgroepen: this.fb.array([this.createDoelgroepen()])
+      'titel':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
+      'beschrijving': ['', Validators.required],
+      'benodigdheden': this.fb.array([this.createBenodigdheden()]),
+      'minAantal': ['', [Validators.max(99), Validators.min(0)]],
+      'maxAantal': ['', [Validators.max(99), Validators.min(0)]],
+      'doelgroepen': this.fb.array([this.createDoelgroepen()])
     });
 
     this.benodigdheden.valueChanges
@@ -125,6 +133,7 @@ export class AddSpelComponent implements OnInit {
     if(this.spel.value.beschrijving.length < 0) {return false}
     if(this.spel.value.minAantal < 0 || this.spel.value.minAantal > 99) {return false}
     if(this.spel.value.maxAantal < 0 || this.spel.value.maxAantal > 99) {return false}
+    if(this.spel.value.minAantal > this.spel.value.maxAantal) {return false}
     return flag;
   }
 

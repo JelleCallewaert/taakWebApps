@@ -17,5 +17,16 @@
     <div class="ui cards">
       <app-spel *ngFor='let localSpel of spelen | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel' (deleteSpel)='removeSpel($event)'></app-spel>
     </div>
+    <div *ngIf='spelen.length === 0'>
+        <div class="ui icon message">
+            <a class="upload icon" href="/spel/nieuw"><i class="upload icon"></i></a>
+            <div class="content">
+              <div class="header">
+                Er zijn geen spelen beschikbaar...
+              </div>
+              <p>Maak zelf een nieuw spel aan!</p>
+            </div>
+          </div>
+    </div>
   </div>
 </div>
