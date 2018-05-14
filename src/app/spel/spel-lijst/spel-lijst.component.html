@@ -1,0 +1,32 @@
+<div class="ui segment">
+  <div class="ui field">
+    <h3>Filter op Doelgroep:</h3>
+    <select class="ui fluid dropdown" #filter1>
+      <option value="">Alles</option>
+      <option value="Kleuters">Kleuters</option>
+      <option value="Creatief">Creatief</option>
+      <option value="Actief">Actief</option>
+      <option value="Kastaards">Kastaards</option>
+    </select>
+    <button (click)="applyFilter(filter1.options[filter1.selectedIndex].value)">filter</button>
+  </div> 
+  <div class="ui field" style="margin-top: 1em">
+    <h3>Alle Spelen:</h3>
+  </div>
+  <div class="ui field" style="margin-top: 2em">
+    <div class="ui cards">
+      <app-spel *ngFor='let localSpel of spelen | doelgroepFilter: filterSpelDoelgroep' [spel]='localSpel' (deleteSpel)='removeSpel($event)'></app-spel>
+    </div>
+    <div *ngIf='spelen.length === 0'>
+        <div class="ui icon message">
+            <a class="upload icon" href="/spel/nieuw"><i class="upload icon"></i></a>
+            <div class="content">
+              <div class="header">
+                Er zijn geen spelen beschikbaar...
+              </div>
+              <p>Maak zelf een nieuw spel aan!</p>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

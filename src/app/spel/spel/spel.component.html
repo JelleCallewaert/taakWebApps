@@ -1,0 +1,18 @@
+<div *ngIf='spel.auteur == currentUser' class="ui card" style="margin-bottom: 1em; margin-right: 4em; margin-left: 1em;">
+  <div class="content">
+    <a class="header" href='/spel/{{spel.id}}'>{{ spel.titel }}</a>
+    <p class="ui content blue"> {{ spel.beschrijving }}</p>
+  </div>
+  <div class="content">
+    Doelgroepen:
+    <ul class="ui list">
+      <li *ngFor='let dg of spel.doelgroepen'>
+        <app-doelgroep [doelgroep]="dg"></app-doelgroep>
+      </li>
+    </ul>
+  </div> 
+      
+  <button class="ui icon button" (click)="removeSpel()">
+    <i class="trash outline icon"></i>
+  </button> 
+</div>

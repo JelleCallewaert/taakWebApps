@@ -1,0 +1,70 @@
+<div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  <form class="ui form" [formGroup]='spel' (ngSubmit)='onSubmit()'>
+    <h3 class="ui header">Voeg Spel Toe</h3>
+    <div class="field">
+      <label for='titel'>Titel:</label>
+      <input type="text" id="titel" formControlName='titel' placeholder="Titel">
+        <div *ngIf='spel.get("titel").errors?.required || spel.get("titel").errors?.maxlength || spel.get("titel").errors?.minlength'>
+          <div *ngIf='spel.get("titel").touched'>
+            <p class="wrongInput">Gelieve een acceptabele titel in te vullen!</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="field">
+      <label for="beschrijving">Beschrijving:</label>
+      <input type="text" id="beschrijving" formControlName='beschrijving' placeholder="Beschrijving">
+      <div *ngIf='spel.get("beschrijving").errors?.required'>
+        <div *ngIf='spel.get("beschrijving").touched'>
+          <p class="wrongInput">Gelieve een beschrijving in te vullen!</p>
+        </div>
+      </div>
+    </div>
+
+    <label for="benodigdheid_naam">Benodigdheden:</label>
+    <div class="field" formArrayName='benodigdheden'
+        *ngFor='let item of benodigdheden.controls; let i = index'>
+      <div [formGroupName] = 'i'>
+        <input type="number" formControlName='aantal' placeholder="Aantal">
+        <input type="text" formControlName='naam' placeholder="Item">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="minAantal">Minimum aantal kinderen:</label>
+      <input type="number" id="minAantal" placeholder="Minimum" formControlName='minAantal'>
+        <div *ngIf='spel.get("minAantal").errors?.min || spel.get("minAantal").errors?.max'>
+          <div *ngIf='spel.get("minAantal").touched'>
+              <p class="wrongInput">Gelieve een acceptabel minimum in te vullen!</p>
+          </div>
+        </div>
+      <label for="maxAantal">Maximum aantal kinderen:</label>
+      <input type="number" id="maxAantal" placeholder="Maximum" formControlName='maxAantal'>
+        <div *ngIf='spel.get("maxAantal").errors?.min || spel.get("maxAantal").errors?.max || spel.get("minAantal").value >= spel.get("maxAantal").value '>
+          <div *ngIf='spel.get("maxAantal").touched'>
+              <p class="wrongInput">Gelieve een acceptabel maximum in te vullen!</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="field">
+      <label for="doelgroep_naam">Doelgroepen:</label>
+      <div formArrayName="doelgroepen" *ngFor='let item of doelgroepen.controls; let i = index'>
+        <div [formGroupName]="i">
+          <div class="field">
+            <select class='ui fluid dropdown' id="doelgroep_naam" formControlName='naam'>
+              <option *ngFor='let dg of alleDoelgroepen | usedDoelgroepFilter : usedDoelgroepen' [value]='dg'>
+                <div>
+                  {{dg}}
+                </div>
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button type="submit" id="submit">Voeg Toe</button>
+  </form>
+</div>
