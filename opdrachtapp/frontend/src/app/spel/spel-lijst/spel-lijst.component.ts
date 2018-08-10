@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class SpelLijstComponent implements OnInit {
 
-  private _spelen : Spel[];
+  private _spelen : Spel[] = [];
   errorMsg: string;
   public filterSpelDoelgroep: string;
   public filterSpel$ = new Subject<string>();
