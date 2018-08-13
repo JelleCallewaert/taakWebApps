@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Spel } from '../spel.model';
+import { Spel } from '../spel/spel.model';
 import { ActivatedRoute } from '@angular/router';
 import { SpelDataService } from '../spel-data.service';
 

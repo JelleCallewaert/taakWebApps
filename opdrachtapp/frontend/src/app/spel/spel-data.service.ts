@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Spel } from './spel.model';
+import { Spel } from './spel/spel.model';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';

@@ -2,10 +2,11 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Spel } from '../spel.model';
+import { Spel } from '../spel/spel.model';
 import { SpelDataService } from '../spel-data.service';
 import { Doelgroep} from '../doelgroep/doelgroep.model';
 import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
+import { Subject } from '../../../../node_modules/rxjs/Subject';
 
 @Component({
   selector: 'app-add-spel',

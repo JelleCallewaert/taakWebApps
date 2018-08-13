@@ -1,5 +1,5 @@
 import { Component, Input, Output , OnInit, EventEmitter } from '@angular/core';
-import { Spel } from '../spel.model';
+import { Spel } from './spel.model';
 
 @Component({
   selector: 'app-spel',

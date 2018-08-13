@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { Spel } from "./spel.model";
+import { Spel } from "./spel/spel.model";
 import { Observable } from "rxjs/Observable";
 import { SpelDataService } from "./spel-data.service";
 
