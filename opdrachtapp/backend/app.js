@@ -14,6 +14,7 @@ mongoose.connect(
 require('./models/Spel');
 require('./models/Benodigdheid');
 require('./models/Doelgroep');
+require('./models/Rating')
 require('./models/User');
 require('./config/passport');
 

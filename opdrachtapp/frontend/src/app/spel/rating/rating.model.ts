@@ -26,7 +26,7 @@ export class Rating {
         return this._id;
     }
 
-    get rate(): Number {
+    get rate(): number {
         return this._rate;
     }
 

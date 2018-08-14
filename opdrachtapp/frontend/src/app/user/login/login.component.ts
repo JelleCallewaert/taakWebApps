@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = undefined;
             } else {
-              console.log("hier zou ik moeten naar spellijst gaan")
               this.router.navigate(['/spel/lijst']);
             }
           } else {

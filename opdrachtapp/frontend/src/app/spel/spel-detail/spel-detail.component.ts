@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Spel } from '../spel/spel.model';
 import { ActivatedRoute } from '@angular/router';
 import { SpelDataService } from '../spel-data.service';
+import { Rating } from '../rating/rating.model';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-spel-detail',
@@ -12,7 +14,7 @@ export class SpelDetailComponent implements OnInit {
 
   private _spel: Spel;
 
-  constructor(private route: ActivatedRoute, private spelDataService: SpelDataService) {}
+  constructor(private route: ActivatedRoute, private spelDataService: SpelDataService, private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.route.data.subscribe(item => 
@@ -21,6 +23,42 @@ export class SpelDetailComponent implements OnInit {
 
   get spel(): Spel{
     return this._spel;
+  }
+
+  starList: boolean[] = [true,true,true,true,true];
+  public vote:number;
+  setStar(data:any){
+      this.vote=data+1;                               
+      for(var i=0;i<=4;i++){  
+        if(i<=data){  
+          this.starList[i]=false;  
+        }  
+        else{  
+          this.starList[i]=true;  
+        }  
+     }  
+  }
+
+  addRating(){
+    if(this.hasNotVoted(this.authService.user$.value)){
+      let rating = new Rating(this.vote);
+      rating.reviewer = this.authService.user$.value;
+      this._spel.addRating(rating);
+      console.log("addrating: " + this.vote);
+      //this.spelDataService.addRating(rating, this._spel)
+    }else{
+      console.log(this.authService.user$.value+" has already voted!")
+    }
+  }
+
+  hasNotVoted(naam: string): boolean{
+    let flag: boolean = true;
+    this._spel.ratings.forEach(rating => {
+      if(rating.reviewer == naam) {
+        flag = false;
+      }
+    })
+    return flag;
   }
 
 }

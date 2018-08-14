@@ -1,7 +1,6 @@
 import { Doelgroep } from '../doelgroep/doelgroep.model';
 import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
 import { Rating } from '../rating/rating.model'
-import { summaryFileName } from '../../../../node_modules/@angular/compiler/src/aot/util';
 
 export class Spel {
     private _id: string;
@@ -32,7 +31,7 @@ export class Spel {
       this._maxAantal = maxAantal;
       this._doelgroepen = doelgroepen || new Array();
       this._datumToegevoegd = datumToegevoegd ? datumToegevoegd : new Date();
-      this._ratings = ratings;
+      this._ratings = ratings || new Array();
     }
 
     get titel() : string {
@@ -72,9 +71,9 @@ export class Spel {
       this._id = id;
     }
 
-    get averageRating(): Number {
+    get averageRating(): number {
       let avg = 0;
-      this._ratings.forEach(rate => avg =+ rate.rate)
+      this._ratings.forEach(rate => avg += rate.rate)
       avg = avg/this._ratings.length;
       return avg;
     }
@@ -85,6 +84,10 @@ export class Spel {
 
     addDoelgroep(doelgroep: Doelgroep){
       this._doelgroepen.push(doelgroep);
+    }
+
+    addRating(rating: Rating){
+      this._ratings.push(rating);
     }
 
     toJSON(){

@@ -17,7 +17,13 @@ let SpelSchema = new mongoose.Schema({
       ref: 'Doelgroep'
     }
   ],
-  datumCreated: { type: Date, default: Date.now }
+  datumCreated: { type: Date, default: Date.now },
+  ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Rating'
+    }
+  ]
 });	
 
 mongoose.model('Spel', SpelSchema);

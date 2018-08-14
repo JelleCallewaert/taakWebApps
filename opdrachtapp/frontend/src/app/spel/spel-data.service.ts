@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { map } from 'rxjs/operators';
 import { Benodigdheid } from './benodigdheid/benodigdheid.model';
+import { Rating } from './rating/rating.model';
 
 @Injectable()
 export class SpelDataService {
@@ -50,9 +51,12 @@ export class SpelDataService {
     return this.http.post(url, spel).pipe(map(Benodigdheid.fromJSON));
   }
 
+  addRating(rating: Rating, spel: Spel): Observable<Spel>{
+    const url = `${this._appUrl}${spel.id}/ratings`;
+    return this.http.post(url, rating).pipe(map(Spel.fromJSON))
+  }
+
   verwijderSpel(spel: Spel): Observable<Spel> {
-    console.log(spel.id);
-    console.log(spel.titel);
     return this.http
       .delete(`${this._appUrl}/spel/${spel.id}`)
       .pipe(map(Spel.fromJSON));

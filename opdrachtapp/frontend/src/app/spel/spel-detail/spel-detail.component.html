@@ -33,6 +33,24 @@
       <div class="content">
         <p><i>Toegevoegd op: {{spel.datumToegevoegd | date:'dd/MM/yyyy'}}</i></p>
       </div>
+
+      <div class="content">
+        Gemiddelde Rating: <i class="star outline icon"></i> {{ spel.averageRating }}
+      </div>
+
+      <div class="content">
+        Alle Ratings: <p *ngFor='let rating of spel.ratings'>{{rating.rate}}</p>
+      </div>
+
+      <div *ngIf='hasNotVoted(authService.user$.value)' class="content">
+        Vote:
+        <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">  
+          <i class="star outline icon"></i>   
+         </a>  
+        <br>  
+        Jouw beoordeling :- {{vote}} stars
+        <a class="btn btn-primary" (click)="addRating()">Vote!</a>  
+      </div>
+      
   </div>
-  <app-rating></app-rating>
 </div>
