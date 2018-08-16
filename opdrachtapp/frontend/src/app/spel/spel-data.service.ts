@@ -39,26 +39,19 @@ export class SpelDataService {
   voegNieuwSpelToe(spel: Spel): Observable<Spel> {
     return this.http
       .post(`${this._appUrl}/spelen`, spel)
-      .pipe(
-        map(
-        Spel.fromJSON
-        )
-      );
+      .pipe(map(Spel.fromJSON));
   }
 
-  voegBenodigdheidToeAanSpel(nodig: Benodigdheid, spel: Spel) : Observable<Benodigdheid>{
-    const url = `${this._appUrl}/spel/${spel.id}/benodigdheden`;
-    return this.http.post(url, spel).pipe(map(Benodigdheid.fromJSON));
-  }
-
-  addRating(rating: Rating, spel: Spel): Observable<Spel>{
-    const url = `${this._appUrl}${spel.id}/ratings`;
-    return this.http.post(url, rating).pipe(map(Spel.fromJSON))
+  addRatingToSpel(rating: Rating, spel: Spel): Observable<Spel>{
+    return this.http
+      .post(`${this._appUrl}spel/${spel.id}/ratings`, rating.toJSON)
+      .pipe(map(Spel.fromJSON));
   }
 
   verwijderSpel(spel: Spel): Observable<Spel> {
+    console.log("verwijder spel:"+ `${this._appUrl}spel/${spel.id}`)
     return this.http
-      .delete(`${this._appUrl}/spel/${spel.id}`)
+      .delete(`${this._appUrl}spel/${spel.id}`)
       .pipe(map(Spel.fromJSON));
   }
 

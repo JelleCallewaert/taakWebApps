@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 let RatingSchema = new mongoose.Schema({
     rate: Number,
-    reviewer: String
+    username: String
 })
 
 RatingSchema.pre('remove', function (next) {

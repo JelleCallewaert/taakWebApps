@@ -1,25 +1,25 @@
 export class Rating {
     private _id: string;
     private _rate: number;
-    private _reviewer: string;
+    private _username: string;
 
     static fromJSON(json): Rating{
-        const rating = new Rating(json._rate);
+        const rating = new Rating(json.rate, json.username);
         rating._id = json._id;
-        rating._reviewer = json._reviewer;
         return rating;
     }
 
     toJSON() {
         return {
             _id: this._id,
-            _rate: this._rate,
-            _reviewer: this._reviewer
+            rate: this._rate,
+            username: this._username
         }
     }
 
-    constructor(rate: number){
+    constructor(rate: number, username: string){
         this._rate = rate;
+        this._username = username;
     }
 
     get id(): string {
@@ -29,12 +29,16 @@ export class Rating {
     get rate(): number {
         return this._rate;
     }
-
-    get reviewer(): string {
-        return this._reviewer;
+    
+    set rate(rate: number){
+        this._rate = rate;
     }
 
-    set reviewer(reviewer: string) {
-        this._reviewer = reviewer;
+    get username(): string {
+        return this._username;
+    }
+
+    set username(username: string) {
+        this._username = username;
     }
 }

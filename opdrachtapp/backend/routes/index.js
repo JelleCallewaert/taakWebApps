@@ -4,12 +4,13 @@ let mongoose = require('mongoose');
 let Spel = mongoose.model('Spel');
 let Benodigdheid = mongoose.model('Benodigdheid');
 let Doelgroep = mongoose.model('Doelgroep');
+let Rating = mongoose.model('Rating')
 let jwt = require('express-jwt');
 
 let auth = jwt({secret: process.env.SPEL_BACKEND_SECRET});
 
 router.get('/API/spelen/', function(req, res, next){
-  let query = Spel.find().populate('benodigdheden').populate('doelgroepen');
+  let query = Spel.find().populate('benodigdheden').populate('doelgroepen').populate('ratings');
   query.exec(function(err, spelen){
     if(err){return next(err)}
     res.json(spelen)
@@ -17,7 +18,6 @@ router.get('/API/spelen/', function(req, res, next){
 });
 
 router.post('/API/spelen/', auth, function(req, res, next){
-
   Doelgroep.create(req.body.doelgroepen, function(err, dgs){
     if(err){return next(err)}
     
@@ -100,9 +100,23 @@ router.post('/API/spel/:spel/doelgroepen', function(req, res, next) {
   });
 });
 
+router.post('/API/spel/:spel/ratings', function (req, res, next) {
+  let rat = new Rating(req.body);
+  //rat.username = req.username;
+  rat.save(function(err, ratin){
+    if(err) return next(err);
+    
+    req.spel.ratings.push(ratin);
+    req.spel.save(function(err){
+      if(err) return next(err);
+      res.json(req.spel);
+    })
+  })
+
+})
+
 router.param('spel', function(req, res, next, id){
-  console.log(id);
-  let query = Spel.findById(id).populate('benodigdheden').populate('doelgroepen');
+  let query = Spel.findById(id).populate('benodigdheden').populate('doelgroepen').populate('ratings');
   query.exec(function(err, spel){
     if(err){return next(err)}
     if(!spel){return next(new Error('not found '+ id));}

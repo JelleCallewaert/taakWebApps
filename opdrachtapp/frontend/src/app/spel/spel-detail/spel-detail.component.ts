@@ -41,23 +41,23 @@ export class SpelDetailComponent implements OnInit {
 
   addRating(){
     if(this.hasNotVoted(this.authService.user$.value)){
-      let rating = new Rating(this.vote);
-      rating.reviewer = this.authService.user$.value;
+      let rating = new Rating(this.vote, this.authService.user$.value);
+      console.log(rating)
       this._spel.addRating(rating);
       console.log("addrating: " + this.vote);
-      //this.spelDataService.addRating(rating, this._spel)
-    }else{
-      console.log(this.authService.user$.value+" has already voted!")
+      console.log(this._spel)
+      this.spelDataService.addRatingToSpel(rating, this._spel)
     }
   }
 
   hasNotVoted(naam: string): boolean{
     let flag: boolean = true;
     this._spel.ratings.forEach(rating => {
-      if(rating.reviewer == naam) {
+      if(rating.username == naam) {
         flag = false;
       }
     })
+    console.log("hasnotvoted:" + flag)
     return flag;
   }
 

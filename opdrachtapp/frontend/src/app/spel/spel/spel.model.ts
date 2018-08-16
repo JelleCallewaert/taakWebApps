@@ -118,7 +118,7 @@ export class Spel {
         json.doelgroepen//.map(Doelgroep.fromJSON)
         ,
         json.datumCreated,
-        json._ratings//map(Rating.fromJSON)
+        json._ratings//.map(Rating.fromJSON)
       );
       sp._id = json._id;
       sp._auteur = json.auteur;
