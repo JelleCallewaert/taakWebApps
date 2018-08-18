@@ -72,11 +72,12 @@ export class AddSpelComponent implements OnInit {
       .subscribe(dgLijst => {
         const lastElem = dgLijst[dgLijst.length - 1];
         let hulpArray = new Array();
-        if(lastElem.naam && lastElem.naam != "Alles" && this.usedDoelgroepen.length < 3){
-          //als er iets geselecteerd is dat niet 'Alles' is: nieuwe dropdown
+        if(lastElem.naam && this.usedDoelgroepen.length < 3){
+          //als er iets geselecteerd is: nieuwe dropdown
           this.doelgroepen.push(this.createDoelgroepen());
           //toevoegen aan usedDoelgroepen;
           this.usedDoelgroepen.push(lastElem.naam);
+          console.log(this.usedDoelgroepen)
         }
       })
 
