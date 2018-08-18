@@ -39,7 +39,7 @@
       </div>
 
       <div class="content">
-        Alle Ratings: <p *ngFor='let rating of spel.ratings'>{{rating.rate}}</p>
+        Alle Ratings: <p *ngFor='let rating of spel.ratings'>{{rating.rate}} from {{rating.username}}</p>
       </div>
 
       <div *ngIf='hasNotVoted(authService.user$.value)' class="content">

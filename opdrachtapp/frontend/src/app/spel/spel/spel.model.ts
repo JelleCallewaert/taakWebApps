@@ -92,7 +92,7 @@ export class Spel {
 
     toJSON(){
       return {
-        id: this._id,
+        _id: this._id,
         titel: this._titel,
         beschrijving: this._beschrijving,
         benodigdheden: this._benodigdheden//.map(nodig => nodig.toJSON)
@@ -118,7 +118,7 @@ export class Spel {
         json.doelgroepen//.map(Doelgroep.fromJSON)
         ,
         json.datumCreated,
-        json._ratings//.map(Rating.fromJSON)
+        json.ratings//.map(Rating.fromJSON)
       );
       sp._id = json._id;
       sp._auteur = json.auteur;

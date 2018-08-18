@@ -42,11 +42,8 @@ export class SpelDetailComponent implements OnInit {
   addRating(){
     if(this.hasNotVoted(this.authService.user$.value)){
       let rating = new Rating(this.vote, this.authService.user$.value);
-      console.log(rating)
-      this._spel.addRating(rating);
-      console.log("addrating: " + this.vote);
-      console.log(this._spel)
       this.spelDataService.addRatingToSpel(rating, this._spel)
+        .subscribe(item => this._spel = item);
     }
   }
 
@@ -57,7 +54,6 @@ export class SpelDetailComponent implements OnInit {
         flag = false;
       }
     })
-    console.log("hasnotvoted:" + flag)
     return flag;
   }
 

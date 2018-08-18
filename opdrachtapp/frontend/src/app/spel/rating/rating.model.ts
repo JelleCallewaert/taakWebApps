@@ -6,6 +6,7 @@ export class Rating {
     static fromJSON(json): Rating{
         const rating = new Rating(json.rate, json.username);
         rating._id = json._id;
+        console.log("fromjson: "+rating)
         return rating;
     }
 

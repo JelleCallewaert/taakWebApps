@@ -7,6 +7,7 @@ import { SpelDataService } from '../spel-data.service';
 import { Doelgroep} from '../doelgroep/doelgroep.model';
 import { Benodigdheid } from '../benodigdheid/benodigdheid.model';
 import { Subject } from '../../../../node_modules/rxjs/Subject';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-add-spel',
@@ -39,7 +40,7 @@ export class AddSpelComponent implements OnInit {
     return <FormControl>this.spel.get('maxAantal');
   }
 
-  constructor(private _spelDataService: SpelDataService, private fb: FormBuilder) { }
+  constructor(private _spelDataService: SpelDataService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.spel = this.fb.group({

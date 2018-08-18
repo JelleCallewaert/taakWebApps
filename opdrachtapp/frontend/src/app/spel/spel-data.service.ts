@@ -13,7 +13,7 @@ export class SpelDataService {
 
   private _spelen = new Array<Spel>();
   
-  private readonly _appUrl = '/API/';
+  private readonly _appUrl = '/API';
 
 
   constructor(private http: HttpClient) {
@@ -44,14 +44,13 @@ export class SpelDataService {
 
   addRatingToSpel(rating: Rating, spel: Spel): Observable<Spel>{
     return this.http
-      .post(`${this._appUrl}spel/${spel.id}/ratings`, rating.toJSON)
+      .post(`${this._appUrl}/spel/${spel.id}/ratings`, rating)
       .pipe(map(Spel.fromJSON));
   }
 
   verwijderSpel(spel: Spel): Observable<Spel> {
-    console.log("verwijder spel:"+ `${this._appUrl}spel/${spel.id}`)
     return this.http
-      .delete(`${this._appUrl}spel/${spel.id}`)
+      .delete(`${this._appUrl}/spel/${spel.id}`)
       .pipe(map(Spel.fromJSON));
   }
 

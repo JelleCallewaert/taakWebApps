@@ -100,20 +100,19 @@ router.post('/API/spel/:spel/doelgroepen', function(req, res, next) {
   });
 });
 
-router.post('/API/spel/:spel/ratings', function (req, res, next) {
-  let rat = new Rating(req.body);
-  //rat.username = req.username;
-  rat.save(function(err, ratin){
-    if(err) return next(err);
-    
-    req.spel.ratings.push(ratin);
-    req.spel.save(function(err){
-      if(err) return next(err);
-      res.json(req.spel);
-    })
-  })
+router.post('/API/spel/:spel/ratings', auth, function(req, res, next) {
+  let ratin = new Rating(req.body);
 
-})
+  ratin.save(function(err, rating) {
+    if (err) return next(err);
+
+    req.spel.ratings.push(rating);
+    req.spel.save(function(err, sp) {
+      if (err) return next(err);
+      res.json(req.spel);
+    });
+  });
+});
 
 router.param('spel', function(req, res, next, id){
   let query = Spel.findById(id).populate('benodigdheden').populate('doelgroepen').populate('ratings');
