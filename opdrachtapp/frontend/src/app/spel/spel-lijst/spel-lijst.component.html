@@ -19,7 +19,7 @@
     </div>
     <div *ngIf='spelen.length === 0'>
         <div class="ui icon message">
-            <a class="upload icon" href="/spel/nieuw"><i class="upload icon"></i></a>
+            <a class="upload icon" (click)='goToNieuwSpel()'><i class="upload icon"></i></a>
             <div class="content">
               <div class="header">
                 Er zijn geen spelen beschikbaar...

@@ -3,6 +3,7 @@ import { Spel } from '../spel/spel.model';
 import { SpelDataService } from '../spel-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-spel-lijst',
@@ -21,7 +22,7 @@ export class SpelLijstComponent implements OnInit {
     this.filterSpelDoelgroep = filter;
   }
 
-  constructor(private _spelDataService : SpelDataService) {
+  constructor(private _spelDataService : SpelDataService, private router : Router) {
     this.filterSpel$.subscribe(val => (this.filterSpelDoelgroep = val))
   }
 
@@ -49,5 +50,9 @@ export class SpelLijstComponent implements OnInit {
         }: ${error.error}`;
       }
     );
+  }
+
+  goToNieuwSpel(){
+    this.router.navigate(['spel/nieuw']);
   }
 }

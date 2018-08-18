@@ -47,8 +47,8 @@ export class AddSpelComponent implements OnInit {
       'titel':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       'beschrijving': ['', Validators.required],
       'benodigdheden': this.fb.array([this.createBenodigdheden()]),
-      'minAantal': ['', [Validators.max(99), Validators.min(0)]],
-      'maxAantal': ['', [Validators.max(99), Validators.min(0)]],
+      'minAantal': [0, [Validators.max(99), Validators.min(0)]],
+      'maxAantal': [0, [Validators.max(99), Validators.min(0)]],
       'doelgroepen': this.fb.array([this.createDoelgroepen()])
     });
 
@@ -77,7 +77,7 @@ export class AddSpelComponent implements OnInit {
         }else if(dgLijst.length >= 2) {
           const secondToLast = dgLijst[dgLijst.length - 2];
           if(
-            lastElem.naam == this.select && secondToLast.naam == this.select
+            (lastElem.naam == this.select && secondToLast.naam == this.select) || (lastElem.naam == "")
           ){
             this.doelgroepen.removeAt(this.doelgroepen.length - 1)
           }
