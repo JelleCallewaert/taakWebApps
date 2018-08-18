@@ -12,13 +12,13 @@ import { Router } from '../../../../node_modules/@angular/router';
 @Component({
   selector: 'app-add-spel',
   templateUrl: './add-spel.component.html',
-  styleUrls: ['./add-spel.component.css'],
-  providers: [ SpelDataService ]
+  styleUrls: ['./add-spel.component.css']
 })
 export class AddSpelComponent implements OnInit {
 
   private spel : FormGroup;
-  public alleDoelgroepen = ["Kleuters", "Actief", "Creatief", "Kastaards"];
+  private select = "Selecteer doelgroep"
+  public alleDoelgroepen = [this.select, "Kleuters", "Actief", "Creatief", "Kastaards"];
   public usedDoelgroepen = [];
   public errorMsg: string;
 
@@ -71,13 +71,16 @@ export class AddSpelComponent implements OnInit {
     this.doelgroepen.valueChanges
       .subscribe(dgLijst => {
         const lastElem = dgLijst[dgLijst.length - 1];
-        let hulpArray = new Array();
-        if(lastElem.naam && this.usedDoelgroepen.length < 3){
-          //als er iets geselecteerd is: nieuwe dropdown
+        if(lastElem.naam && lastElem.naam != this.select && this.usedDoelgroepen.length < 3){
           this.doelgroepen.push(this.createDoelgroepen());
-          //toevoegen aan usedDoelgroepen;
           this.usedDoelgroepen.push(lastElem.naam);
-          console.log(this.usedDoelgroepen)
+        }else if(dgLijst.length >= 2) {
+          const secondToLast = dgLijst[dgLijst.length - 2];
+          if(
+            lastElem.naam == this.select && secondToLast.naam == this.select
+          ){
+            this.doelgroepen.removeAt(this.doelgroepen.length - 1)
+          }
         }
       })
 
@@ -98,7 +101,7 @@ export class AddSpelComponent implements OnInit {
         }
       }
       for(const dg of this.spel.value.doelgroepen){
-        if(dg.naam.length > 1)
+        if(dg.naam.length > 1 && dg.naam != this.select)
           sp.addDoelgroep(new Doelgroep(dg.naam));
         
       }
@@ -125,7 +128,7 @@ export class AddSpelComponent implements OnInit {
 
   createDoelgroepen(): FormGroup {
     return this.fb.group({
-      naam: ['']
+      naam: [this.select]
     })
   }
 
